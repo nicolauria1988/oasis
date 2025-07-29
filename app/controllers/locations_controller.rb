@@ -24,7 +24,10 @@ class LocationsController < ApplicationController
 
   def update
     @location = Location.find(params[:id])
-    params[:available_dates] = JSON.parse(params[:available_dates])
+    if params[:available_dates]
+      params[:available_dates] = JSON.parse(params[:available_dates])
+    end
+    debugger
     if @location.update(location_params)
       redirect_to "/account"
     else

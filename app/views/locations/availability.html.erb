@@ -1,6 +1,4 @@
-<script type="module">
-  import "calendar";
-</script>
+<script type="module">import "calendar";</script>
 
 <h2 class="text-xl w-full text-center mt-5 mb-2">Add Availability</h2>
 <p class="w-full text-lg mb-5 text-center text-gray-500">Select a start date and end date by clicking calendar dates.</p>
@@ -12,7 +10,14 @@
   </div>
 </div>
 
-<div id="added-dates" class="max-w-3xl mx-auto mb-5"></div>
+<div id="added-dates" class="max-w-3xl mx-auto mb-5" data-dates="<%= @location.available_dates.to_json %>">
+  <% @location.available_dates.each do |date_range| %>
+    <div class="mb-5 p-3 outline-1 outline-gray-300 flex justify-between items-center">
+      <p><%= "#{date_range["startDate"]} - #{date_range["endDate"]}" %></p>
+      <%= image_tag "/images/close-icon.png", class: "close-button size-5 cursor-pointer", data: { dateRange: date_range } %>
+    </div>
+  <% end %>
+</div>
 
 <form action="<%= location_path(@location)%>" method="POST" class="w-full block text-center max-w-3xl mx-auto mb-5 p-3 outline-1 outline-gray-300">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">

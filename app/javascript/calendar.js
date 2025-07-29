@@ -149,13 +149,32 @@ document.addEventListener("DOMContentLoaded", function () {
   // Add Event Handlers for selecting dates
   const dates = document.querySelectorAll("[data-date]");
   const addedDates = document.getElementById("added-dates");
+  let datesObj = JSON.parse(addedDates.dataset.dates);
+
+  // Dates are added to this form hidden input
   const availableDates = document.getElementById("available-dates");
-  const datesObj = [];
+  availableDates.value = JSON.stringify(datesObj);
+
+  // Event handler for removing date ranges
+  function removeDateRange(e, dateRange) {
+    datesObj = datesObj.filter((el) => {
+      el != dateRange;
+    });
+    availableDates.value = JSON.stringify(datesObj);
+    e.target.parentElement.remove();
+  }
 
   let startTd = null;
   let endTd = null;
   let startDate = null;
   let endDate = null;
+
+  const closeBtn = document.querySelectorAll(".close-button");
+  closeBtn.forEach((btn) => {
+    btn.addEventListener("click", function (e) {
+      removeDateRange(e, JSON.parse(e.target.dataset.daterange));
+    });
+  });
 
   dates.forEach((date) => {
     date.addEventListener("click", function (e) {
@@ -193,6 +212,8 @@ document.addEventListener("DOMContentLoaded", function () {
         endTd = e.target;
         endTd.style.backgroundColor = "#e8f0fe";
 
+        let dateRange = { startDate: startDate, endDate: endDate };
+
         let dateRangeDiv = document.createElement("div");
         dateRangeDiv.classList.add(
           "mb-5",
@@ -205,17 +226,14 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
         let dateRangeP = document.createElement("p");
-        dateRangeP.innerText = `Start Date: ${startDate} - End Date: ${endDate}`;
+        dateRangeP.innerText = `${startDate} - ${endDate}`;
 
         let closeButton = document.createElement("img");
         closeButton.classList.add("size-5", "cursor-pointer");
         closeButton.src = "/images/close-icon.png";
 
         closeButton.addEventListener("click", function (e) {
-          addedDates.filter((el) => {
-            el.startDate != selectedDate && el.endDate != selectedDate;
-          });
-          e.target.parentElement.remove();
+          removeDateRange(dateRange);
         });
 
         dateRangeDiv.appendChild(dateRangeP);
@@ -223,7 +241,7 @@ document.addEventListener("DOMContentLoaded", function () {
         addedDates.appendChild(dateRangeDiv);
 
         // Rails link_to handles patch request, could use js fetch instead
-        datesObj.push({ startDate: startDate, endDate: endDate });
+        datesObj.push(dateRange);
         availableDates.value = JSON.stringify(datesObj);
 
         startTd.style.backgroundColor = "#fff";
