@@ -1,0 +1,29 @@
+<header class="h-[100px] border-b-1 border-gray-100">
+  <div class="h-full mx-auto max-w-7xl p-5 grid grid-cols-[1fr_3fr_1fr] items-center">
+    <a href="<%= root_path %>">
+      <h1 class="text-3xl text-primary font-bold">Oasis</h1>
+    </a>
+    <input type="search" name="search" placeholder="Search" class="w-3/4 justify-self-center p-3 outline-1 outline-gray-300" />
+    <% if current_user && current_user.avatar.attached? %>
+      <%= image_tag current_user.avatar, id: "user-menu-button", class: "size-8 rounded-full cursor-pointer justify-self-end" %>
+    <% else %>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 cursor-pointer justify-self-end" id="user-menu-button">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+    </svg>
+    <% end %>
+  </div>
+</header>
+
+<div id="user-menu" class="hide absolute top-0 right-0 h-screen w-screen overflow-hidden sm:top-20 sm:right-[5%] sm:size-40 z-2 flex flex-col justify-center items-center gap-5 sm:gap-1 bg-gray-100">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" id="mobile-menu-close" class="size-6 absolute top-5 left-5 sm:hidden">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+  </svg>
+
+  <% if current_user %>
+    <a href="/account" class="font-bold text-xl sm:font-normal sm:text-lg hover:bg-gray-300 py-2 px-5">Account</a>
+    <%= link_to "Sign Out", session_path(current_user), data: { turbo_method: :delete }, class: "font-bold text-xl sm:font-normal sm:text-lg hover:bg-gray-300 py-2 px-5" %>
+  <% else %>
+    <a href="<%= new_session_path %>" class="font-bold text-xl sm:font-normal sm:text-lg mb-3 hover:bg-gray-300 py-2 px-5">Sign In</a>
+    <a href="<%= new_user_path %>" class="font-bold text-xl sm:font-normal sm:text-lg hover:bg-gray-300 py-2 px-5">Sign Up</a>
+  <% end %>
+</div>

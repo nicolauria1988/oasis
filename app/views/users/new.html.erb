@@ -1,0 +1,13 @@
+<div class="h-[calc(100vh_-_100px)] flex flex-col justify-center items-center">
+  <% @user.errors.full_messages.each do |message| %>
+    <p class="mb-5"><%= message %></p>
+  <% end %>
+  <h1 class="text-3xl font-bold mb-5">Sign Up</h1>
+  <form action="<%= users_path %>" method="POST" class="w-90 sm:w-100">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+    <input type="email" name="email" placeholder="Email" class="w-full block p-3 outline-1 outline-gray-300 mb-5" required />
+    <input type="password" name="password" placeholder="Password" class="w-full block p-3 outline-1 outline-gray-300 mb-5" required />
+    <input type="submit" value="Submit" class="w-full block p-3 outline-1 outline-gray-300 mb-5 cursor-pointer" />
+  </form>
+  <a href="<%= new_session_path %>">Click here to login instead.</a>
+</div>

@@ -1,0 +1,99 @@
+<h2 class="text-xl mt-5 mb-5">Profile</h2>
+
+<div class="overflow-x-auto">
+<table class="min-w-full divide-y divide-gray-300">
+  <thead>
+    <tr>
+      <th scope="col" class="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-0">Name</th>
+      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Email</th>
+      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Phone</th>
+      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Street</th>
+      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">City</th>
+      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">State</th>
+      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Country</th>
+      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Zip Code</th>
+    </tr>
+  </thead>
+  <tbody class="divide-y divide-gray-200">
+    <tr>
+      <td class="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-0"><%= current_user.name %></td>
+      <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500"><%= current_user.email %></td>
+      <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500"><%= current_user.phone %></td>
+      <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500"><%= current_user.street %></td>
+      <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500"><%= current_user.city %></td>
+      <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500"><%= current_user.state %></td>
+      <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500"><%= current_user.country %></td>
+      <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500"><%= current_user.zip_code %></td>
+      <td class="relative py-4 pr-4 pl-3 text-right text-sm font-medium whitespace-nowrap sm:pr-0">
+        <a href="<%= edit_user_path(current_user) %>" class="text-primary">Edit</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 class="text-xl mt-5 mb-5">Locations</h2>
+
+<div class="overflow-x-auto">
+<table class="min-w-full divide-y divide-gray-300">
+  <thead>
+    <tr>
+      <th scope="col" class="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-0">Street</th>
+      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status</th>
+      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Email</th>
+      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Messages</th>
+      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Price</th>
+      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Rating</th>
+      <th scope="col">
+        <a href="<%= new_location_path %>" class="block text-primary text-right" >Add New</a>
+      </th>
+    </tr>
+  </thead>
+  <tbody class="divide-y divide-gray-200">
+    <% current_user.locations.each do |location| %>
+      <tr>
+        <td class="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-0"><%= location.street %></td>
+        <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500">Occupied</td>
+        <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500">lindsay.walton@example.com</td>
+        <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500">No messages</td>
+        <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500">$150</td>
+        <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500">4.75</td>
+        <td class="relative py-4 pr-4 pl-3 text-right text-sm font-medium whitespace-nowrap sm:pr-0">
+          <a href="<%= location_availability_path(location) %>" class="text-primary inline-block" data-turbo="false">Availability</a>
+          <span> | </span>
+          <a href="<%= edit_location_path(location) %>" class="text-primary inline-block">Edit</a>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+<h2 class="text-xl mt-10 mb-5">Reservations</h2>
+
+<div class="overflow-x-auto">
+<table class="min-w-full divide-y divide-gray-300 mb-5">
+  <thead>
+    <tr>
+      <th scope="col" class="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-0">Name</th>
+      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Title</th>
+      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Email</th>
+      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Role</th>
+      <th scope="col" class="relative py-3.5 pr-4 pl-3 sm:pr-0">
+        <span class="sr-only">Edit</span>
+      </th>
+    </tr>
+  </thead>
+  <tbody class="divide-y divide-gray-200">
+    <tr>
+      <td class="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-0">Lindsay Walton</td>
+      <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500">Front-end Developer</td>
+      <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500">lindsay.walton@example.com</td>
+      <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500">Member</td>
+      <td class="relative py-4 pr-4 pl-3 text-right text-sm font-medium whitespace-nowrap sm:pr-0">
+        <a href="#" class="text-primary">Edit<span class="sr-only">, Lindsay Walton</span></a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>

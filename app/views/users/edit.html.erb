@@ -1,0 +1,25 @@
+
+<div class="min-h-[calc(100vh_-_100px)] flex flex-col justify-center items-center">
+  <% @user.errors.full_messages.each do |message| %>
+    <p class="mb-5"><%= message %></p>
+  <% end %>
+  <h2 class="text-xl w-full text-start mt-5 sm:mt-0 mb-5">Edit Profile</h2>
+  <form action="<%= user_path(current_user) %>" method="POST" enctype="multipart/form-data" class="w-full">
+    <input type="hidden" name="_method" value="PATCH">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+    <div class="flex flex-col flex-wrap sm:flex-row justify-center items-center gap-5">
+      <input type="text" name="name" value="<%= @user.name %>" placeholder="Name" class="w-full block p-3 outline-1 outline-gray-300 basis-[calc(100%-10px)] sm:basis-[calc(50%-10px)]" required />
+      <input type="text" name="phone" value="<%= @user.phone %>" placeholder="Phone" class="w-full block p-3 outline-1 outline-gray-300 basis-[calc(100%-10px)] sm:basis-[calc(50%-10px)]" required />
+      <input type="email" name="email" value="<%= @user.email %>" placeholder="Email" class="w-full block p-3 outline-1 outline-gray-300 basis-[calc(100%-10px)] sm:basis-[calc(50%-10px)]" required />
+      <input type="password" name="password" placeholder="Password" class="w-full block p-3 outline-1 outline-gray-300 basis-[calc(100%-10px)] sm:basis-[calc(50%-10px)]" required />
+      <input type="text" name="street" value="<%= @user.street %>" placeholder="Street" class="w-full block p-3 outline-1 outline-gray-300 basis-[calc(100%-10px)] sm:basis-[calc(50%-10px)]" required />
+      <input type="text" name="city" value="<%= @user.city %>" placeholder="City" class="w-full block p-3 outline-1 outline-gray-300 basis-[calc(100%-10px)] sm:basis-[calc(50%-10px)]" required />
+      <input type="text" name="state" value="<%= @user.state %>" placeholder="State" class="w-full block p-3 outline-1 outline-gray-300 basis-[calc(100%-10px)] sm:basis-[calc(50%-10px)]" required />
+      <input type="text" name="zip_code" value="<%= @user.zip_code %>" placeholder="Zip Code" class="w-full block p-3 outline-1 outline-gray-300 basis-[calc(100%-10px)] sm:basis-[calc(50%-10px)]" required />
+      <input type="text" name="country" value="<%= @user.country %>" placeholder="Country" class="w-full block p-3 outline-1 outline-gray-300 basis-[calc(100%-10px)] sm:basis-[calc(50%-10px)]" required />
+      <input type="file" name="avatar" value="<%= @user.avatar %>" class="w-full block p-3 outline-1 outline-gray-300 basis-[calc(100%-10px)] sm:basis-[calc(50%-10px)]" />
+      
+      <input type="submit" value="Submit" class="mb-5 sm:mb-0 w-full block p-3 outline-1 outline-gray-300 cursor-pointer" />
+    </div>
+  </form>
+</div>

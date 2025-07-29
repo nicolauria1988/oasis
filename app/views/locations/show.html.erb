@@ -1,0 +1,64 @@
+<!--<script type="module">
+  import "custom/locations";
+</script>-->
+
+<div class="grid gap-4 max-w-3xl mx-auto">
+  <div class="flex justify-between items-center">
+    <div>
+      <h3 class="text-xl font-bold"><%= @location.street %></h3>
+      <p class="text-sm"><%= "#{@location.city}, #{@location.state}" %></p>
+    </div>
+    <div>
+      <h4 class="text-lg"><%= "$#{@location.price} per night" %></h4>
+      <p class="text-sm">4.7 (100 reviews)</p>
+    </div>
+  </div>
+  <div>
+      <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/featured/image.jpg" alt="">
+  </div>
+  <div class="grid grid-cols-5 gap-4">
+      <div>
+          <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg" alt="">
+      </div>
+      <div>
+          <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg" alt="">
+      </div>
+      <div>
+          <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-3.jpg" alt="">
+      </div>
+      <div>
+          <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-4.jpg" alt="">
+      </div>
+      <div>
+          <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-5.jpg" alt="">
+      </div>
+  </div>
+</div>
+
+<div class="max-w-3xl mx-auto divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow-sm mt-10">
+  <div class="flex justify-between items-center gap-5 px-4 py-5 sm:px-6">
+    <div class="block sm:flex items-center gap-5">
+      <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" class="inline-block size-14 rounded-full" />
+      <div>
+        <h2 class="text-xl font-bold" >Jason Williams</h2>
+        <p>Hosting since 1/1/2020</p>
+      </div>
+    </div>
+    <button type="button" class="inline-flex items-center gap-x-2 rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+    <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true" class="-ml-0.5 size-5">
+    <path d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5Z" clip-rule="evenodd" fill-rule="evenodd" />
+    </svg>
+    Contact
+  </button>
+  </div>
+  <div class="px-4 py-5 sm:p-6">
+    <p class="text-lg/7">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+  </div>
+</div>
+
+<!--<div id="calendar" class="mt-5 mb-10 max-w-3xl mx-auto" data-calendar="<%#= @calendar %>">
+  <div id="calendar-arrows" class="flex justify-center items-center gap-5 mb-5 w-[350px] mx-auto">
+    <%#= image_tag "arrow-left.png", id: "arrow-left", class: "cursor-pointer" %>-->
+    <%#= image_tag "arrow-right.png", id: "arrow-right", class: "cursor-pointer" %>
+<!--  </div>
+</div>-->
