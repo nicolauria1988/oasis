@@ -1,3 +1,5 @@
+require 'mini_magick'
+
 class LocationsController < ApplicationController
   include LocationsHelper
   before_action :authenticate_user, only: [:new, :create, :edit, :update, :availability]
@@ -8,6 +10,14 @@ class LocationsController < ApplicationController
   end
 
   def create
+    resized_images = []
+    params[:images].each do |image|
+      img = MiniMagick::Image.new(image.tempfile.path)
+      img.resize "1000x"
+      resized_images << img
+    end
+    params[:images] = resized_images
+    
     @location = Location.new(location_params)
     @location.owner_id = current_user.id
     if @location.save
@@ -27,7 +37,6 @@ class LocationsController < ApplicationController
     if params[:available_dates]
       params[:available_dates] = JSON.parse(params[:available_dates])
     end
-    debugger
     if @location.update(location_params)
       redirect_to "/account"
     else

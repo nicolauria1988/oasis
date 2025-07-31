@@ -1,6 +1,6 @@
 class Location < ApplicationRecord
   belongs_to :user, foreign_key: 'owner_id'
-  has_many_attached :images
+  has_many_attached :images, dependent: :purge
 
   validates :street, :category, presence: true
   validates :city, presence: true, format: { with: /\A[a-zA-Z\s.-]+\z/ }
