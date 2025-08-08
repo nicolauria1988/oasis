@@ -39,11 +39,11 @@
   <thead>
     <tr>
       <th scope="col" class="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-0">Street</th>
-      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status</th>
-      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Email</th>
-      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Messages</th>
+      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">City</th>
+      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">State</th>
+      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Country</th>
+      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Type</th>
       <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Price</th>
-      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Rating</th>
       <th scope="col">
         <a href="<%= new_location_path %>" class="block text-primary text-right" >Add New</a>
       </th>
@@ -53,11 +53,11 @@
     <% current_user.locations.each do |location| %>
       <tr>
         <td class="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-0"><%= location.street %></td>
-        <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500">Occupied</td>
-        <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500">lindsay.walton@example.com</td>
-        <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500">No messages</td>
-        <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500">$150</td>
-        <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500">4.75</td>
+        <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500"><%= location.city %></td>
+        <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500"><%= location.state %></td>
+        <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500"><%= location.country %></td>
+        <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500"><%= location.category %></td>
+        <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500"><%= "$#{location.price}" %></td>
         <td class="relative py-4 pr-4 pl-3 text-right text-sm font-medium whitespace-nowrap sm:pr-0">
           <a href="<%= location_availability_path(location) %>" class="text-primary inline-block">Availability</a>
           <span> | </span>
