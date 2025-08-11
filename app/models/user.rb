@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
   has_one_attached :avatar, dependent: :purge
-  has_many :locations, foreign_key: "owner_id"
+  has_many :locations
   
   # User Sign Up
   validates :password, presence: true, length: { minimum: 10 }, on: :create

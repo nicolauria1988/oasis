@@ -43,7 +43,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_29_004005) do
   end
 
   create_table "locations", force: :cascade do |t|
-    t.bigint "owner_id", null: false
+    t.bigint "user_id", null: false
     t.string "street"
     t.string "city"
     t.string "state"
@@ -56,7 +56,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_29_004005) do
     t.float "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["owner_id"], name: "index_locations_on_owner_id"
+    t.index ["user_id"], name: "index_locations_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -75,5 +75,5 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_29_004005) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "locations", "users", column: "owner_id"
+  add_foreign_key "locations", "users"
 end
