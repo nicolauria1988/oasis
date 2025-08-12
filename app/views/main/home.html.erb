@@ -1,17 +1,14 @@
-<h2 class="text-xl mt-5 mb-5">Los Angeles, CA</h2>
+<h2 class="text-xl mt-5 mb-5">All Results</h2>
 
 <ul role="list" class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8 mb-5">
   <% @locations.each do |location| %>
     <a href="<%= location_path(location) %>">
       <li class="relative">
         <div class="group overflow-hidden rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 focus-within:ring-offset-gray-100">
-          <%= image_tag location.images.first, class: "pointer-events-none aspect-10/7 object-cover group-hover:opacity-75" %>
-          <button type="button" class="absolute inset-0 focus:outline-hidden">
-            <span class="sr-only"><%= location.city %></span>
-          </button>
+          <%= image_tag location.images.first, class: "aspect-10/7 object-cover group-hover:opacity-75 cursor-pointer" %>
         </div>
-        <p class="pointer-events-none mt-2 block truncate text-sm font-medium text-gray-900"><%= location.city %></p>
-        <p class="pointer-events-none block text-sm font-medium text-gray-500">$<%= location.price %></p>
+        <p class="mt-2 block truncate text-sm font-medium text-gray-900"><%= location.city %></p>
+        <p class="block text-sm font-medium text-gray-500">$<%= location.price %></p>
       </li>
     </a>
   <% end %>
