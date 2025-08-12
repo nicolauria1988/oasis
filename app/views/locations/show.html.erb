@@ -1,6 +1,6 @@
-<!--<script type="module">
-  import "custom/locations";
-</script>-->
+<script type="module">
+  import "location_show";
+</script>
 
 <div class="grid gap-4 max-w-3xl mx-auto">
   <div class="flex justify-between items-center mt-10">
@@ -14,23 +14,23 @@
     </div>
   </div>
   <div>
-      <%= image_tag @location.images[0], class: "h-auto max-w-full rounded-lg h-full" %>
+      <%= image_tag @location.images[0], class: "w-full rounded-lg h-100", id: "main-image" %>
   </div>
   <div class="grid grid-cols-5 gap-4">
       <div>
-          <%= image_tag @location.images[0], class: "h-auto max-w-full rounded-lg h-full" %>
+          <%= image_tag @location.images[0], class: "h-auto max-w-full rounded-lg h-full image-thumbnail cursor-pointer" %>
       </div>
       <div>
-          <%= image_tag @location.images[1], class: "h-auto max-w-full rounded-lg h-full" %>
+          <%= image_tag @location.images[1], class: "h-auto max-w-full rounded-lg h-full image-thumbnail cursor-pointer" %>
       </div>
       <div>
-          <%= image_tag @location.images[2], class: "h-auto max-w-full rounded-lg h-full" %>
+          <%= image_tag @location.images[2], class: "h-auto max-w-full rounded-lg h-full image-thumbnail cursor-pointer" %>
       </div>
       <div>
-          <%= image_tag @location.images[3], class: "h-auto max-w-full rounded-lg h-full" %>
+          <%= image_tag @location.images[3], class: "h-auto max-w-full rounded-lg h-full image-thumbnail cursor-pointer" %>
       </div>
       <div>
-          <%= image_tag @location.images[4], class: "h-auto max-w-full rounded-lg h-full" %>
+          <%= image_tag @location.images[4], class: "h-auto max-w-full rounded-lg h-full image-thumbnail cursor-pointer" %>
       </div>
   </div>
 </div>

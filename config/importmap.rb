@@ -5,3 +5,4 @@ pin "application"
 pin "header", to: "header.js"
 pin "calendar", to: "calendar.js", preload: false
 pin "images", to: "images.js", preload: false
+pin "location_show", to: "location_show.js", preload: false
