@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create, :edit, :update, :destroy]
   resources :sessions, only: [:new, :create, :destroy]
   resources :locations, only: [:new, :create, :show, :edit, :update, :destroy]
+  resources :reservations, only: [:create]
   get "/location/:id/availability", to: "locations#availability", as: "location_availability"
   
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

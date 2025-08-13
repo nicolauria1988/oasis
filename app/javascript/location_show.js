@@ -176,11 +176,11 @@ document.addEventListener("DOMContentLoaded", function () {
         e.target.style.backgroundColor = "#e8f0fe";
       } else {
         endDate = date;
-        let dateRange = { startDate: startDate, endDate: endDate };
+        let dateRange = { start_date: startDate, end_date: endDate };
 
         let dateRangeDiv = document.createElement("div");
         dateRangeDiv.classList.add(
-          "mb-10",
+          "mb-5",
           "p-3",
           "outline-1",
           "outline-gray-300",
@@ -220,6 +220,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const addedDates = document.getElementById("added-dates");
         addedDates.appendChild(dateRangeDiv);
+
+        // add dates to location show form
+        const startDateInput = document.getElementById("start-date");
+        const endDateInput = document.getElementById("end-date");
+        const totalInput = document.getElementById("total");
+
+        startDateInput.value = startDate.dataset.date;
+        endDateInput.value = endDate.dataset.date;
+        totalInput.value = total;
+
+        const reservationForm = document.getElementById("reservation-form");
+        reservationForm.style.display = "block";
 
         window.scrollTo(0, document.body.scrollHeight);
         startDate.style.backgroundColor = "#fff";

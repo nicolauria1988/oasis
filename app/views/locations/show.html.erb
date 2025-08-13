@@ -35,7 +35,7 @@
   </div>
 </div>
 
-<div class="max-w-3xl mx-auto divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow-sm mt-10 mb-10">
+<div class="max-w-3xl mx-auto divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow-sm mt-10 mb-5">
   <div class="flex justify-between items-center gap-5 px-4 py-5 sm:px-6">
     <div class="block sm:flex items-center gap-5">
       <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" class="inline-block size-14 rounded-full" />
@@ -50,11 +50,26 @@
   </div>
 </div>
 
-<div id="calendar" data-calendar="<%= @calendar %>" class="mt-5 mb-10 max-w-3xl mx-auto">
-  <div id="calendar-arrows" class="flex justify-center items-center gap-5 mb-5 w-[350px] mx-auto">
-    <%= image_tag "arrow-left.png", id: "arrow-left", class: "cursor-pointer" %>
-    <%= image_tag "arrow-right.png", id: "arrow-right", class: "cursor-pointer" %>
+<% if !current_user %>
+  <p class="max-w-3xl mx-auto mb-5 p-3 outline-1 outline-gray-300 text-center">Booking calendar not displayed because you are not signed in.</p>
+<% elsif current_user == @location.user %>
+  <p class="max-w-3xl mx-auto mb-5 p-3 outline-1 outline-gray-300 text-center">Booking calendar not displayed because you own this property.</p>
+<% else %>
+  <div id="calendar" data-calendar="<%= @calendar %>" class="mt-5 mb-10 max-w-3xl mx-auto">
+    <div id="calendar-arrows" class="flex justify-center items-center gap-5 mb-5 w-[350px] mx-auto">
+      <%= image_tag "arrow-left.png", id: "arrow-left", class: "cursor-pointer" %>
+      <%= image_tag "arrow-right.png", id: "arrow-right", class: "cursor-pointer" %>
+    </div>
   </div>
-</div>
+<% end %>
 
 <div id="added-dates" class="max-w-3xl mx-auto mb-5"></div>
+
+<form action="<%= reservations_path %>" method="POST" class="hide w-full block text-center max-w-3xl mx-auto mb-10 p-3 outline-1 outline-gray-300" id="reservation-form">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="hidden" name="start_date" id="start-date">
+  <input type="hidden" name="end_date" id="end-date">
+  <input type="hidden" name="total" id="total">
+  <input type="hidden" name="location_id" value="<%= @location.id %>">
+  <input type="submit" value="Reserve" class="cursor-pointer">
+</form>

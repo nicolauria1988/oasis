@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_secure_password
   has_one_attached :avatar, dependent: :purge
   has_many :locations
+  has_many :reservations
   
   # User Sign Up
   validates :password, presence: true, length: { minimum: 10 }, on: :create
