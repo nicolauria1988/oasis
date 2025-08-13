@@ -19,7 +19,7 @@
   <% end %>
 </div>
 
-<form action="<%= location_path(@location)%>" method="POST" class="w-full block text-center max-w-3xl mx-auto mb-5 p-3 outline-1 outline-gray-300">
+<form action="<%= location_path(@location)%>" method="POST" class="w-full block text-center max-w-3xl mx-auto mb-10 p-3 outline-1 outline-gray-300">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
   <input type="hidden" name="_method" value="PATCH">
   <input type="hidden" name="available_dates" id="available-dates">

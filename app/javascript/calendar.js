@@ -149,6 +149,8 @@ document.addEventListener("DOMContentLoaded", function () {
   // Add Event Handlers for selecting dates
   const dates = document.querySelectorAll("[data-date]");
   const addedDates = document.getElementById("added-dates");
+
+  // datesObj is an array
   let datesObj = JSON.parse(addedDates.dataset.dates);
 
   // Dates are added to this form hidden input
@@ -158,8 +160,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // Event handler for removing date ranges
   function removeDateRange(e, dateRange) {
     datesObj = datesObj.filter((el) => {
-      el != dateRange;
+      el.startDate != dateRange.startDate;
     });
+
     availableDates.value = JSON.stringify(datesObj);
     e.target.parentElement.remove();
   }
