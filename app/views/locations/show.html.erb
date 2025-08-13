@@ -9,7 +9,7 @@
       <p class="text-sm"><%= "#{@location.city}, #{@location.state}" %></p>
     </div>
     <div>
-      <h4 class="text-lg"><%= "$#{@location.price} per night" %></h4>
+      <h4 class="text-lg" id="price" data-price="<%= @location.price %>"><%= "$#{@location.price} per night" %></h4>
       <p class="text-sm">4.7 (100 reviews)</p>
     </div>
   </div>
@@ -56,3 +56,5 @@
     <%= image_tag "arrow-right.png", id: "arrow-right", class: "cursor-pointer" %>
   </div>
 </div>
+
+<div id="added-dates" class="max-w-3xl mx-auto mb-5"></div>

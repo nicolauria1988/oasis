@@ -22,7 +22,7 @@
     <a href="/account" class="font-bold text-xl sm:font-normal sm:text-lg hover:bg-gray-300 py-2 px-5">Account</a>
     <%= button_to "Sign Out", session_path(current_user), method: :delete, class: "font-bold text-xl sm:font-normal sm:text-lg hover:bg-gray-300 py-2 px-5 cursor-pointer" %>
   <% else %>
-    <a href="<%= new_session_path %>" class="font-bold text-xl sm:font-normal sm:text-lg mb-3 hover:bg-gray-300 py-2 px-5">Sign In</a>
+    <a href="<%= new_session_path %>" class="font-bold text-xl sm:font-normal sm:text-lg hover:bg-gray-300 py-2 px-5">Sign In</a>
     <a href="<%= new_user_path %>" class="font-bold text-xl sm:font-normal sm:text-lg hover:bg-gray-300 py-2 px-5">Sign Up</a>
   <% end %>
 </div>

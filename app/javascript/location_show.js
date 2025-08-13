@@ -112,6 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
       td = document.createElement("td");
       td.textContent = key.split("-")[1];
       td.setAttribute("data-date", key);
+      td.setAttribute("data-available", month[key]);
       tr.appendChild(td);
 
       if (idx == endOfMonth) {
@@ -153,5 +154,76 @@ document.addEventListener("DOMContentLoaded", function () {
     nextTable.classList.toggle("hidden");
     currentTable = nextTable;
     index += 1;
+  });
+
+  // Handle td click events
+  const dates = document.querySelectorAll("[data-date]");
+  let startDate = null;
+  let endDate = null;
+
+  dates.forEach(function (date) {
+    if (date.dataset.available == "false") {
+      date.style.backgroundColor = "gainsboro";
+    }
+
+    date.addEventListener("click", function (e) {
+      if (date.dataset.available == "false") {
+        return;
+      }
+
+      if (!startDate) {
+        startDate = date;
+        e.target.style.backgroundColor = "#e8f0fe";
+      } else {
+        endDate = date;
+        let dateRange = { startDate: startDate, endDate: endDate };
+
+        let dateRangeDiv = document.createElement("div");
+        dateRangeDiv.classList.add(
+          "mb-10",
+          "p-3",
+          "outline-1",
+          "outline-gray-300",
+          "flex",
+          "justify-between",
+          "items-center"
+        );
+
+        const cost = document.getElementById("price");
+        const total = Number(cost.dataset.price);
+        let startDateObj = new Date(startDate.dataset.date);
+        let endDateObj = new Date(endDate.dataset.date);
+        let numberOfNights = 0;
+
+        while (startDateObj < endDateObj) {
+          numberOfNights += 1;
+          startDateObj.setDate(startDateObj.getDate() + 1);
+        }
+
+        let dateRangeP = document.createElement("p");
+        dateRangeP.innerText = `${startDate.dataset.date} - ${
+          endDate.dataset.date
+        } ($${total * numberOfNights})`;
+
+        let closeButton = document.createElement("img");
+        closeButton.classList.add("size-5", "cursor-pointer");
+        closeButton.src = "/images/close-icon.png";
+
+        closeButton.addEventListener("click", function (e) {
+          startDate = null;
+          endDate = null;
+          e.target.parentElement.remove();
+        });
+
+        dateRangeDiv.appendChild(dateRangeP);
+        dateRangeDiv.appendChild(closeButton);
+
+        const addedDates = document.getElementById("added-dates");
+        addedDates.appendChild(dateRangeDiv);
+
+        window.scrollTo(0, document.body.scrollHeight);
+        startDate.style.backgroundColor = "#fff";
+      }
+    });
   });
 });
