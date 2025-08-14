@@ -81,20 +81,10 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  primary: &primary_production
-    <<: *default
-    database: oasis_production
-    username: oasis
-    password: <%= ENV["OASIS_DATABASE_PASSWORD"] %>
-  cache:
-    <<: *primary_production
-    database: oasis_production_cache
-    migrations_paths: db/cache_migrate
-  queue:
-    <<: *primary_production
-    database: oasis_production_queue
-    migrations_paths: db/queue_migrate
-  cable:
-    <<: *primary_production
-    database: oasis_production_cable
-    migrations_paths: db/cable_migrate
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  database: <%= Rails.application.credentials.postgres[:name] %>
+  host: <%= Rails.application.credentials.postgres[:host] %>
+  username: <%= Rails.application.credentials.postgres[:username] %>
+  password: <%= Rails.application.credentials.postgres[:password] %>
