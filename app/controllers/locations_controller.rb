@@ -52,7 +52,7 @@ class LocationsController < ApplicationController
   
   def show
     @location = Location.find(params[:id])
-    @calendar = create_calendar(@location.available_dates)
+    @calendar = create_calendar(@location)
     render :show
   end
 

@@ -1,5 +1,5 @@
 module LocationsHelper
-  def create_calendar(availability = {})
+  def create_calendar(location = nil)
     calendar = []
     now = Date.today
     current_day = Date.new(now.year, now.month, 1)
@@ -9,21 +9,32 @@ module LocationsHelper
       month = {}
 
       while current_day <= end_of_month
-        start_sym = current_day.strftime("%m-%d-%Y").to_sym
+        day_string = current_day.strftime("%m-%d-%Y").to_sym
 
-        if availability.length > 0
-          availability.each do |date_range|
+        if location && location.available_dates.length > 0
+          location.available_dates.each do |date_range|
             start_date = Date.strptime(date_range["startDate"], "%m-%d-%Y")
             end_date = Date.strptime(date_range["endDate"], "%m-%d-%Y")
 
             if current_day.between?(start_date, end_date)
-              month[start_sym] = true
+              month[day_string] = true
             else
-              month[start_sym] = false
+              month[day_string] = false
             end
           end
         else
-          month[start_sym] = false
+          month[day_string] = false
+        end
+
+        if location and location.reservations.length > 0
+          location.reservations.each do |reservation|
+            start_date = Date.strptime(reservation["start_date"], "%m-%d-%Y")
+            end_date = Date.strptime(reservation["end_date"], "%m-%d-%Y")
+
+            if current_day.between?(start_date, end_date)
+              month[day_string] = false
+            end
+          end
         end
         
         current_day += 1
