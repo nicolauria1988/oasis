@@ -6,7 +6,8 @@ class ReservationsController < ApplicationController
     if @reservation.save
       redirect_to "/account"
     else
-      render location_path(params[:location_id])
+      @location = Location.find(params[:location_id])
+      render location_path(@location)
     end
   end
 
