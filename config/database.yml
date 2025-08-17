@@ -22,9 +22,9 @@ default: &default
 development:
   <<: *default
   database: oasis_development
-  host: <%= Rails.application.credentials.postgres[:host] %>
-  username: <%= Rails.application.credentials.postgres[:username] %>
-  password: <%= Rails.application.credentials.postgres[:password] %>
+  host: <%= Rails.application.credentials.postgres_dev[:host] %>
+  username: <%= Rails.application.credentials.postgres_dev[:username] %>
+  password: <%= Rails.application.credentials.postgres_dev[:password] %>
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
@@ -84,7 +84,7 @@ production:
   adapter: postgresql
   encoding: unicode
   pool: 5
-  database: <%= Rails.application.credentials.postgres[:name] %>
-  host: <%= Rails.application.credentials.postgres[:host] %>
-  username: <%= Rails.application.credentials.postgres[:username] %>
-  password: <%= Rails.application.credentials.postgres[:password] %>
+  database: oasis_production
+  host: <%= Rails.application.credentials.postgres_prod[:host] %>
+  username: <%= Rails.application.credentials.postgres_prod[:username] %>
+  password: <%= Rails.application.credentials.postgres_prod[:password] %>
