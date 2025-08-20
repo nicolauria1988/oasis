@@ -11,7 +11,7 @@
 require 'factory_bot_rails'
 require 'faker'
 
-if Rails.env.development?
+# if Rails.env.development?
 
   index = 1
   
@@ -51,9 +51,7 @@ if Rails.env.development?
       end
     end
   end
-end
-
-# locations = create_list(:location, 24)
+# end
 
 24.times do |i|
   user = FactoryBot.create(:user)
