@@ -234,9 +234,10 @@ document.addEventListener("DOMContentLoaded", function () {
         let closeButton = document.createElement("img");
         closeButton.classList.add("size-5", "cursor-pointer");
         closeButton.src = "/images/close-icon.png";
+        closeButton.dataset.daterange = JSON.stringify(dateRange);
 
         closeButton.addEventListener("click", function (e) {
-          removeDateRange(dateRange);
+          removeDateRange(e, JSON.parse(e.target.dataset.daterange));
         });
 
         dateRangeDiv.appendChild(dateRangeP);
