@@ -1,6 +1,6 @@
 # oasisdev.app
 
-Application for hosting and booking homes
+Application for hosting and reserving homes
 
 - Digital Ocean Droplet (Ubuntu 25.04) running Apache
 
