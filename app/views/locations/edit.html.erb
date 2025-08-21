@@ -1,3 +1,7 @@
+<script type="module">
+  import "images";
+</script>
+
 <div class="min-h-[calc(100vh_-_100px)] flex flex-col justify-center items-center">
   <% @location.errors.full_messages.each do |message| %>
     <p class="mb-5"><%= message %></p>
@@ -27,7 +31,11 @@
         <option value="Room">Room</option>
       </select>
       
-      <input type="file" name="images[]" multiple value="<%= @location.images %>" placeholder="Images" class="w-full block p-3 outline-1 outline-gray-300 basis-[calc(100%-10px)] sm:basis-[calc(50%-10px)]" required />
+      <div id="image-div" class="w-full p-3 outline-1 outline-gray-300 basis-[calc(100%-10px)] sm:basis-[calc(50%-10px)] cursor-pointer flex items-center gap-5">
+        <p>If changing images (5 required)</p>
+      </div>
+      
+      <input type="file" name="images[]" multiple value="<%= @location.images %>" placeholder="Images" id="image-files" class="hide w-full block p-3 outline-1 outline-gray-300 basis-[calc(100%-10px)] sm:basis-[calc(50%-10px)]" />
 
       <textarea name="notes" class="w-full block p-3 outline-1 outline-gray-300 basis-[100%]" rows="8" cols="50" placeholder="Notes"><%= @location.notes %></textarea>
       

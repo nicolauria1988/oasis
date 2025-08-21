@@ -103,6 +103,11 @@ document.addEventListener("DOMContentLoaded", function () {
       td = document.createElement("td");
       td.textContent = key.split("-")[1];
       td.setAttribute("data-date", key);
+
+      if (date < today) {
+        td.style.backgroundColor = "gainsboro";
+      }
+
       tr.appendChild(td);
 
       if (idx == endOfMonth) {

@@ -113,6 +113,11 @@ document.addEventListener("DOMContentLoaded", function () {
       td.textContent = key.split("-")[1];
       td.setAttribute("data-date", key);
       td.setAttribute("data-available", month[key]);
+
+      if (date < today) {
+        td.style.backgroundColor = "gainsboro";
+      }
+
       tr.appendChild(td);
 
       if (idx == endOfMonth) {
@@ -167,7 +172,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     date.addEventListener("click", function (e) {
-      if (date.dataset.available == "false") {
+      if (
+        date.dataset.available == "false" ||
+        new Date(date.dataset.date) < today
+      ) {
         return;
       }
 
