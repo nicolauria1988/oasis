@@ -199,11 +199,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const cost = document.getElementById("price");
         const total = Number(cost.dataset.price);
+        console.log(total);
         let startDateObj = new Date(startDate.dataset.date);
         let endDateObj = new Date(endDate.dataset.date);
         let numberOfNights = 0;
 
-        while (startDateObj < endDateObj) {
+        while (startDateObj <= endDateObj) {
           numberOfNights += 1;
           startDateObj.setDate(startDateObj.getDate() + 1);
         }
@@ -236,7 +237,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         startDateInput.value = startDate.dataset.date;
         endDateInput.value = endDate.dataset.date;
-        totalInput.value = total;
+        totalInput.value = total * numberOfNights;
 
         const reservationForm = document.getElementById("reservation-form");
         reservationForm.style.display = "block";

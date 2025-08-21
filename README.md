@@ -1,24 +1,24 @@
-# README
+# oasisdev.app
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Application for hosting and booking homes
 
-Things you may want to cover:
+- Digital Ocean Droplet (Ubuntu 25.04) running Apache
 
-* Ruby version
+## Stack
 
-* System dependencies
+Ruby 3.4.4, Rails 8.0.2, PostgreSQL 17, Tailwind CSS 4
 
-* Configuration
+## Notes
 
-* Database creation
+- Repository includes images for database seeding
+- To add available_dates to all locations in console run:
 
-* Database initialization
+```ruby
+Location.all.each do |location|
+  location.available_dates = [{"startDate" => "08-21-2025", "endDate" => "12-31-2025"}]
+  location.save
+end
+```
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- To test the application feel free to create account with fake email
+  (there is currently no email verification)
