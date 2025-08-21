@@ -2,7 +2,7 @@ class MainController < ApplicationController
   before_action :authenticate_user, only: [:account]
   
   def home
-    @locations = Location.all
+    @locations = Location.with_attached_images.all
     render :home
   end
 
