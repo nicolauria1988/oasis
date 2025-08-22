@@ -4,7 +4,7 @@ class Location < ApplicationRecord
   has_many_attached :images, dependent: :purge
 
   validates :street, :category, presence: true
-  validates :city, presence: true, format: { with: /\A[a-zA-Z\s.-]+\z/ }
+  validates :city, presence: true
   validates :state, presence: true, format: { with: /\A[A-Z][a-z]+(?: +[A-Z][a-z]+)*\z/ }
   validates :country, presence: true
   validates :zip_code, presence: true, format: { with: /\A\d{5}(?:-\d{4})?\z/ }
