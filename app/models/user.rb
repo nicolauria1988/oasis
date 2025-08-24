@@ -11,7 +11,7 @@ class User < ApplicationRecord
   # User add info to profile
   validates :name, :street, presence: true, on: :update
   validates :phone, presence: true, format: { with: /\A(?:\+?1[-. ]?)?\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})\z/ }, on: :update
-  validates :city, presence: true
+  validates :city, presence: true, on: :update
   validates :state, presence: true, format: { with: /\A[A-Z][a-z]+(?: +[A-Z][a-z]+)*\z/ }, on: :update
   validates :country, presence: true, format: { with: /\A[A-Za-z\s'-]+\z/ }, on: :update
   validates :zip_code, presence: true, format: { with: /\A\d{5}(?:-\d{4})?\z/ }, on: :update
