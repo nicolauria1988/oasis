@@ -182,7 +182,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (!startDate) {
         startDate = date;
         e.target.style.backgroundColor = "#e8f0fe";
-      } else {
+      } else if (!endDate) {
         endDate = date;
         let dateRange = { start_date: startDate, end_date: endDate };
 
@@ -199,7 +199,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const cost = document.getElementById("price");
         const total = Number(cost.dataset.price);
-        console.log(total);
+
         let startDateObj = new Date(startDate.dataset.date);
         let endDateObj = new Date(endDate.dataset.date);
         let numberOfNights = 0;
