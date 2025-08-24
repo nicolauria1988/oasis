@@ -33,3 +33,11 @@ a {
   text-align: center;
   cursor: pointer;
 }
+
+.scrollable::-webkit-scrollbar {
+  height: 8px;
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+  background: #ccc;
+}

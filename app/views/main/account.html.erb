@@ -1,11 +1,11 @@
 <h2 class="text-xl mt-10 mb-5">Profile</h2>
 
 <div class="overflow-x-scroll">
-<table class="min-w-full divide-y divide-solid divide-gray-300">
+<table class="min-w-full divide-y divide-solid divide-gray-300 scrollable">
   <thead>
     <tr>
-      <th scope="col" class="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-0">Name</th>
       <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Email</th>
+      <th scope="col" class="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-0">Name</th>
       <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Phone</th>
       <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Street</th>
       <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">City</th>
@@ -16,8 +16,8 @@
   </thead>
   <tbody class="divide-y divide-solid divide-gray-200">
     <tr>
-      <td class="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-0"><%= current_user.name %></td>
       <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500"><%= current_user.email %></td>
+      <td class="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-0"><%= current_user.name %></td>
       <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500"><%= current_user.phone %></td>
       <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500"><%= current_user.street %></td>
       <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500"><%= current_user.city %></td>
@@ -35,7 +35,7 @@
 <h2 class="text-xl mt-5 mb-5">Locations</h2>
 
 <div class="overflow-x-scroll">
-<table class="min-w-full divide-y divide-solid divide-gray-300">
+<table class="min-w-full divide-y divide-solid divide-gray-300 scrollable">
   <thead>
     <tr>
       <th scope="col" class="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-0">Street</th>
@@ -76,7 +76,7 @@
 <h2 class="text-xl mt-10 mb-5">Reservations</h2>
 
 <div class="overflow-x-scroll">
-<table class="min-w-full divide-y divide-solid divide-gray-300 mb-5">
+<table class="min-w-full divide-y divide-solid divide-gray-300 mb-5 scrollable">
   <thead>
     <tr>
       <th scope="col" class="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-0">Role</th>
@@ -85,8 +85,8 @@
       <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">State</th>
       <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Zip</th>
       <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Country</th>
-      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Start Date</th>
-      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">End Date</th>
+      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Start-Date</th>
+      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">End-Date</th>
       <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Total</th>
     </tr>
   </thead>
