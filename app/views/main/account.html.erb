@@ -1,7 +1,7 @@
 <h2 class="text-xl mt-10 mb-5">Profile</h2>
 
-<div class="overflow-x-auto">
-<table class="min-w-full divide-y divide-gray-300">
+<div class="overflow-x-scroll">
+<table class="min-w-full divide-y divide-solid divide-gray-300">
   <thead>
     <tr>
       <th scope="col" class="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-0">Name</th>
@@ -14,7 +14,7 @@
       <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Zip</th>
     </tr>
   </thead>
-  <tbody class="divide-y divide-gray-200">
+  <tbody class="divide-y divide-solid divide-gray-200">
     <tr>
       <td class="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-0"><%= current_user.name %></td>
       <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500"><%= current_user.email %></td>
@@ -34,8 +34,8 @@
 
 <h2 class="text-xl mt-5 mb-5">Locations</h2>
 
-<div class="overflow-x-auto">
-<table class="min-w-full divide-y divide-gray-300">
+<div class="overflow-x-scroll">
+<table class="min-w-full divide-y divide-solid divide-gray-300">
   <thead>
     <tr>
       <th scope="col" class="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-0">Street</th>
@@ -51,7 +51,7 @@
       </th>
     </tr>
   </thead>
-  <tbody class="divide-y divide-gray-200">
+  <tbody class="divide-y divide-solid divide-gray-200">
     <% current_user.locations.each do |location| %>
       <tr>
         <td class="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-0"><%= location.street %></td>
@@ -75,8 +75,8 @@
 
 <h2 class="text-xl mt-10 mb-5">Reservations</h2>
 
-<div class="overflow-x-auto">
-<table class="min-w-full divide-y divide-gray-300 mb-5">
+<div class="overflow-x-scroll">
+<table class="min-w-full divide-y divide-solid divide-gray-300 mb-5">
   <thead>
     <tr>
       <th scope="col" class="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-0">Role</th>
@@ -90,7 +90,7 @@
       <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Total</th>
     </tr>
   </thead>
-  <tbody class="divide-y divide-gray-200">
+  <tbody class="divide-y divide-solid divide-gray-200">
     <% current_user.reservations.each do |reservation| %>
       <tr>
         <td class="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-0">
