@@ -10,7 +10,7 @@ const locationSchema = new Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
-    sreet: {
+    street: {
       type: String,
       required: true,
     },
@@ -30,23 +30,26 @@ const locationSchema = new Schema(
       type: String,
       required: true,
     },
-    category: {
-      type: String,
-      required: true,
-    },
     price: {
       type: String,
       required: true,
+    },
+    images: {
+      type: [String],
+      validate: {
+        validator: function (arr) {
+          return arr.length == 5;
+        },
+      },
     },
     notes: {
       type: String,
       required: true,
       minlength: 100,
-      maxlength: 300,
+      maxlength: 600,
     },
     availableDates: {
       type: Object,
-      required: true,
     },
   },
   { timestamps: true }

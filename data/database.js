@@ -1,10 +1,7 @@
 import mongoose from "mongoose";
 
 export async function connectDB() {
-  await mongoose.connect("mongodb://localhost:27017/oasis", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
+  await mongoose.connect("mongodb://localhost:27017/oasis");
 }
 
 export default connectDB;
