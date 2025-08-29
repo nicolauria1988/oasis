@@ -7,6 +7,7 @@ import authRoutes from "./routes/auth.js";
 import csurf from "csurf";
 import mongoose from "mongoose";
 import MongoStore from "connect-mongo";
+import Location from "./data/Location.js";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -61,8 +62,9 @@ app.use(
 app.use(express.static("public"));
 
 // Home route
-app.get("/", (req, res) => {
-  res.render("index");
+app.get("/", async (req, res) => {
+  const locations = await Location.find({});
+  res.render("index", { locations });
 });
 
 // Middleware for redirecting the user to the account page
@@ -99,6 +101,21 @@ const requireLogin = (req, res, next) => {
 // Account route
 app.get("/account", requireLogin, (req, res) => {
   res.render("account", { user: req.session.user });
+});
+
+// Location route
+app.get("/location/:id", async (req, res) => {
+  const locationId = req.params.id;
+
+  if (!mongoose.Types.ObjectId.isValid(locationId)) {
+    return res.status(400).json({ error: "Invalid location ID" });
+  }
+
+  const location = await Location.findById(locationId);
+
+  if (!location) return res.status(404).json({ error: "Location not found" });
+
+  res.render("location", { user: req.session.user, location: location });
 });
 
 // Set Register and Login auth routes

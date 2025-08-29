@@ -8,6 +8,32 @@
   </head>
   <body>
     <%- include('header.ejs') %>
+    <h2 class="text-xl mt-5 px-10">All Results</h2>
+    <ul
+      role="list"
+      class="grid grid-cols-2 gap-x-4 gap-y-4 sm:gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8 mb-5 px-10 py-5"
+    >
+      <% locations.forEach(location => { %>
+      <a href="/location/<%= location.id %>">
+        <li class="relative">
+          <div
+            class="group overflow-hidden rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 focus-within:ring-offset-gray-100"
+          >
+            <img
+              src="./images/<%= location.images[0] %>"
+              class="aspect-10/7 object-cover group-hover:opacity-75 cursor-pointer"
+            />
+          </div>
+          <p class="mt-2 block truncate text-sm font-medium text-gray-900">
+            <%= location.city %>
+          </p>
+          <p class="block text-sm font-medium text-gray-500">
+            $<%= location.price %>
+          </p>
+        </li>
+      </a>
+      <% }) %>
+    </ul>
     <script src="/js/header.js"></script>
   </body>
 </html>
