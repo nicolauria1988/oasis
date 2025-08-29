@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Open Sans";
+  src: url("/open-sans.ttf");
+}
+
+@theme {
+  --color-primary: dodgerblue;
+  --color-secondary: aliceblue;
+}
+
+body {
+  font-family: "Open Sans";
+}
+
+.hide {
+  display: none;
+}

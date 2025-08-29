@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Oasis</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <%- include('header.ejs') %>
+    <div
+      class="h-[calc(100dvh_-_100px)] flex flex-col justify-center items-center"
+    >
+      <h1 class="text-3xl font-bold mb-5">Login</h1>
+      <form action="/auth/login" method="POST" class="w-90 sm:w-100">
+        <input type="hidden" name="_csrf" value="${req.csrfToken()}" />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          class="w-full block p-3 outline-1 outline-gray-300 mb-5"
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          class="w-full block p-3 outline-1 outline-gray-300 mb-5"
+          required
+        />
+        <input
+          type="submit"
+          value="Submit"
+          class="w-full block p-3 outline-1 outline-gray-300 mb-5 cursor-pointer"
+        />
+      </form>
+      <a href="/register">Click here to register instead.</a>
+    </div>
+    <script src="/js/header.js"></script>
+  </body>
+</html>
