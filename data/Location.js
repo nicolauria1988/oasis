@@ -48,9 +48,7 @@ const locationSchema = new Schema(
       minlength: 100,
       maxlength: 600,
     },
-    availableDates: {
-      type: Object,
-    },
+    availableDates: [{ type: Object }],
   },
   { timestamps: true }
 );
