@@ -12,8 +12,8 @@
       class="h-[calc(100dvh_-_100px)] flex flex-col justify-center items-center"
     >
       <h1 class="text-3xl font-bold mb-5">Login</h1>
-      <form action="/auth/login" method="POST" class="w-90 sm:w-100">
-        <input type="hidden" name="_csrf" value="${req.csrfToken()}" />
+      <form action="/login" method="POST" class="w-90 sm:w-100">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
         <input
           type="email"
           name="email"

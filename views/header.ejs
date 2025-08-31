@@ -47,8 +47,27 @@
     />
   </svg>
 
+  <% if (user) { %>
+
+  <a href="/account" class="mb-5 hover:text-[var(--color-primary)]">Account</a>
+
+  <form action="/logout" method="POST">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+    <button
+      type="submit"
+      class="cursor-pointer hover:text-[var(--color-primary)]"
+    >
+      Logout
+    </button>
+  </form>
+
+  <% } else { %>
+
   <a href="/register" class="mb-5 hover:text-[var(--color-primary)]"
     >Register</a
   >
+
   <a href="/login" class="hover:text-[var(--color-primary)]">Login</a>
+
+  <% } %>
 </div>

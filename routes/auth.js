@@ -3,6 +3,25 @@ import User from "../data/User.js";
 
 const router = express.Router();
 
+// Middleware for redirecting the user to the account page
+const sessionChecker = (req, res, next) => {
+  if (req.session.user && req.cookies.user_sid) {
+    res.redirect("/account");
+  } else {
+    next();
+  }
+};
+
+// Register page
+router.get("/register", sessionChecker, (req, res) => {
+  res.render("register");
+});
+
+// Login page
+router.get("/login", sessionChecker, (req, res) => {
+  res.render("login");
+});
+
 // Register user
 router.post("/register", async (req, res) => {
   const { email, password } = req.body;
@@ -34,7 +53,7 @@ router.post("/login", async (req, res) => {
 router.post("/logout", (req, res) => {
   req.session.destroy((err) => {
     if (err) return res.status(500).json({ message: "Logout failed" });
-    res.clearCookie("connect.sid");
+    res.clearCookie("user_sid");
     res.redirect("/");
   });
 });

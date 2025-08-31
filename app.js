@@ -4,10 +4,11 @@ import path from "path";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import authRoutes from "./routes/auth.js";
-import csurf from "csurf";
 import mongoose from "mongoose";
 import MongoStore from "connect-mongo";
 import Location from "./data/Location.js";
+import locationRoutes from "./routes/locationRoutes.js";
+import csrf from "csurf";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -58,6 +59,17 @@ app.use(
   })
 );
 
+// CSRF protection
+const csrfProtection = csrf();
+app.use(csrfProtection);
+
+// Middleware for user and csrfToken
+app.use((req, res, next) => {
+  res.locals.user = req.session.user || null;
+  res.locals.csrfToken = req.csrfToken();
+  next();
+});
+
 // Set the public folder for file includes
 app.use(express.static("public"));
 
@@ -67,27 +79,8 @@ app.get("/", async (req, res) => {
   res.render("index", { locations });
 });
 
-// Middleware for redirecting the user to the account page
-const sessionChecker = (req, res, next) => {
-  if (req.session.user && req.cookies.user_sid) {
-    res.redirect("/account");
-  } else {
-    next();
-  }
-};
-
-// Setup CSRF protection using cookie
-const csrfProtection = csurf({ cookie: true });
-
-// Register route
-app.get("/register", sessionChecker, csrfProtection, (req, res) => {
-  res.render("register");
-});
-
-// Login route
-app.get("/login", sessionChecker, csrfProtection, (req, res) => {
-  res.render("login");
-});
+// Set Register and Login auth routes
+app.use(authRoutes);
 
 // User auth middleware
 const requireLogin = (req, res, next) => {
@@ -100,25 +93,10 @@ const requireLogin = (req, res, next) => {
 
 // Account route
 app.get("/account", requireLogin, (req, res) => {
-  res.render("account", { user: req.session.user });
+  res.render("account");
 });
 
-// Location route
-app.get("/location/:id", async (req, res) => {
-  const locationId = req.params.id;
-
-  if (!mongoose.Types.ObjectId.isValid(locationId)) {
-    return res.status(400).json({ error: "Invalid location ID" });
-  }
-
-  const location = await Location.findById(locationId);
-
-  if (!location) return res.status(404).json({ error: "Location not found" });
-
-  res.render("location", { user: req.session.user, location: location });
-});
-
-// Set Register and Login auth routes
-app.use("/auth", authRoutes);
+// Location routes
+app.use("/location", locationRoutes);
 
 export default app;
