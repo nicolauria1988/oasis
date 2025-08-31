@@ -68,38 +68,59 @@ document.addEventListener("DOMContentLoaded", function () {
   const today = new Date();
   let currentMonth = today.getMonth();
 
-  let monthCount = 0;
+  let monthCount = 1;
 
   while (monthCount <= 12) {
     let currentDay = new Date(today.getFullYear(), currentMonth, 1);
     let lastDay = new Date(today.getFullYear(), currentMonth + 1, 0);
 
     let table = document.createElement("table");
+    // table.id = `month-${monthCount}`;
     table.classList.add("w-full", "mt-10");
 
     let tableCaption = document.createElement("caption");
     tableCaption.classList.add("mx-auto", "mb-5");
     let monthHeading = months[currentMonth];
 
+    let yearOffset = Math.floor((today.getMonth() + monthCount - 1) / 12);
+    let displayYear = today.getFullYear() + yearOffset;
+
     let arrowLeft = document.createElement("img");
-    arrowLeft.classList.add("inline-block", "w-10", "mr-5", "cursor-pointer");
+    arrowLeft.classList.add(
+      "inline-block",
+      "w-10",
+      "mr-5",
+      "cursor-pointer",
+      "arrow-left"
+    );
     arrowLeft.src = "../images/arrow-left.png";
     tableCaption.appendChild(arrowLeft);
 
     let tableTitle = document.createElement("h1");
-    tableTitle.classList.add("text-2xl", "text-center", "inline-block");
-    tableTitle.innerText = `${monthHeading}, ${today.getFullYear()}`;
+    tableTitle.classList.add(
+      "text-2xl",
+      "text-center",
+      "inline-block",
+      "align-middle"
+    );
+    tableTitle.innerText = `${monthHeading}, ${displayYear}`;
     tableCaption.appendChild(tableTitle);
 
     let arrowRight = document.createElement("img");
-    arrowRight.classList.add("inline-block", "w-10", "ml-5", "cursor-pointer");
+    arrowRight.classList.add(
+      "inline-block",
+      "w-10",
+      "ml-5",
+      "cursor-pointer",
+      "arrow-right"
+    );
     arrowRight.src = "../images/arrow-right.png";
     tableCaption.appendChild(arrowRight);
 
     table.appendChild(tableCaption);
     table.appendChild(daysTr.cloneNode(true));
 
-    if (monthCount != 0) {
+    if (monthCount != 1) {
       table.classList.add("hidden");
     }
 
@@ -125,4 +146,31 @@ document.addEventListener("DOMContentLoaded", function () {
     currentMonth = (currentMonth + 1) % 12;
     monthCount += 1;
   }
+
+  // Navigate to next month on arrow click
+  const tables = document.querySelectorAll("#calendar table");
+
+  let currentTableIndex = 0;
+
+  function updateTableVisibility(newIndex) {
+    tables[currentTableIndex].classList.add("hidden");
+    tables[newIndex].classList.remove("hidden");
+    currentTableIndex = newIndex;
+  }
+
+  tables.forEach((table, index) => {
+    const caption = table.querySelector("caption");
+    const leftArrow = caption.querySelector(".arrow-left");
+    const rightArrow = caption.querySelector(".arrow-right");
+
+    leftArrow.addEventListener("click", function () {
+      if (currentTableIndex === 0) return;
+      updateTableVisibility(currentTableIndex - 1);
+    });
+
+    rightArrow.addEventListener("click", function () {
+      if (currentTableIndex === tables.length - 1) return;
+      updateTableVisibility(currentTableIndex + 1);
+    });
+  });
 });

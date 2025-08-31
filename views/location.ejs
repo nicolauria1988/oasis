@@ -122,26 +122,6 @@
         </div> -->
       </div>
       <% } %>
-
-      <div id="added-dates" class="max-w-3xl mx-auto mb-5"></div>
-
-      <form
-        action="/location"
-        method="POST"
-        class="hide w-full block text-center max-w-3xl mx-auto mb-10 p-3 outline-1 outline-gray-300"
-        id="reservation-form"
-      >
-        <input
-          type="hidden"
-          name="authenticity_token"
-          value="${req.csrfToken()}"
-        />
-        <input type="hidden" name="start_date" id="start-date" />
-        <input type="hidden" name="end_date" id="end-date" />
-        <input type="hidden" name="total" id="total" />
-        <input type="hidden" name="location_id" value="<%= location.id %>" />
-        <input type="submit" value="Reserve" class="cursor-pointer" />
-      </form>
     </div>
     <script src="/js/header.js"></script>
     <script src="/js/location.js"></script>
