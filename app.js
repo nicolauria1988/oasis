@@ -8,6 +8,7 @@ import mongoose from "mongoose";
 import MongoStore from "connect-mongo";
 import Location from "./data/Location.js";
 import locationRoutes from "./routes/locationRoutes.js";
+import reservationRoutes from "./routes/reservationRoutes.js";
 import csrf from "csurf";
 import dotenv from "dotenv";
 
@@ -98,5 +99,8 @@ app.get("/account", requireLogin, (req, res) => {
 
 // Location routes
 app.use("/location", locationRoutes);
+
+// Reservation routes
+app.use(reservationRoutes);
 
 export default app;

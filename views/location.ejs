@@ -99,7 +99,7 @@
       >
         Booking calendar not displayed because you own this property.
       </p>
-      <% } else { %> <%= console.log(location.availableDates) %>
+      <% } else { %>
       <div
         id="calendar"
         data-availableDates="<%= JSON.stringify(location.availableDates || []) %>"
@@ -109,6 +109,13 @@
       <% } %>
     </div>
     <script src="/js/header.js"></script>
+    <script>
+      const userId = "<%= user._id %>";
+      const locationId = "<%= location._id %>";
+    </script>
+    <script>
+      const csrfToken = "<%= csrfToken %>";
+    </script>
     <script src="/js/location.js"></script>
   </body>
 </html>

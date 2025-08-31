@@ -205,17 +205,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
           button.addEventListener("click", async () => {
             const data = {
+              user: userId,
+              location: locationId,
               startDate: startDate.dataset.date,
               endDate: endDate.dataset.date,
+              total: price,
             };
 
             await fetch("/reservation", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
+                "X-CSRF-Token": csrfToken,
               },
               body: JSON.stringify(data),
             });
+
+            window.location.href = "/account";
           });
 
           addedDate.appendChild(button);
