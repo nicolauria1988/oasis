@@ -10,7 +10,7 @@
     <%- include('header.ejs') %>
     <div class="px-10 py-5">
       <div class="grid gap-4 max-w-3xl mx-auto">
-        <div class="flex justify-between items-center mt-10">
+        <div class="flex justify-between items-center mt-5">
           <div>
             <h3 class="text-xl font-bold"><%= location.street %></h3>
             <p class="text-sm"><%= `${location.city}, ${location.state}` %></p>
@@ -103,24 +103,9 @@
       <div
         id="calendar"
         data-availableDates="<%= JSON.stringify(location.availableDates || []) %>"
-        class="mt-5 mb-10 max-w-3xl mx-auto"
-      >
-        <!-- <div
-          id="calendar-arrows"
-          class="flex justify-center items-center gap-5 mb-5 w-[350px] mx-auto"
-        >
-          <img
-            src="../images/arrow-left.png"
-            class="cursor-pointer"
-            id="arrow-left"
-          />
-          <img
-            src="../images/arrow-right.png"
-            class="cursor-pointer"
-            id="arrow-right"
-          />
-        </div> -->
-      </div>
+        class="mt-5 mb-5 max-w-3xl mx-auto"
+      ></div>
+      <div id="added-date"></div>
       <% } %>
     </div>
     <script src="/js/header.js"></script>

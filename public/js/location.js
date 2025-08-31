@@ -70,12 +70,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let monthCount = 1;
 
+  // Variables for td click events
+  let startDate = null;
+  let endDate = null;
+
   while (monthCount <= 12) {
     let currentDay = new Date(today.getFullYear(), currentMonth, 1);
     let lastDay = new Date(today.getFullYear(), currentMonth + 1, 0);
 
     let table = document.createElement("table");
-    // table.id = `month-${monthCount}`;
     table.classList.add("w-full", "mt-10");
 
     let tableCaption = document.createElement("caption");
@@ -133,9 +136,94 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       let td = document.createElement("td");
-      td.classList.add("text-center", "p-3", "border", "border-gray-300");
+      td.classList.add(
+        "text-center",
+        "p-3",
+        "border",
+        "border-gray-300",
+        "cursor-pointer"
+      );
       const dateString = currentDay.toISOString().split("T")[0];
+      td.dataset.date = dateString;
       td.innerText = dateString.split("-")[2];
+
+      td.addEventListener("click", function (e) {
+        if (new Date(e.target.dataset.date) <= today) {
+          return;
+        }
+
+        if (!startDate) {
+          e.target.style.backgroundColor = "aliceblue";
+          startDate = e.target;
+        } else {
+          let addedDate = document.getElementById("added-date");
+          let dateRange = document.createElement("div");
+          dateRange.classList.add(
+            "max-w-3xl",
+            "mx-auto",
+            "p-5",
+            "border",
+            "border-gray-300",
+            "flex",
+            "justify-between",
+            "items-center",
+            "mb-5"
+          );
+          endDate = e.target;
+          startDate.style.backgroundColor = "#fff";
+
+          const price =
+            Number(document.getElementById("price").dataset.price) *
+            numberOfNights(startDate.dataset.date, endDate.dataset.date);
+
+          dateRange.innerText = `${startDate.dataset.date} - ${endDate.dataset.date} ($${price})`;
+
+          const closeIcon = document.createElement("img");
+          closeIcon.classList.add("w-5", "cursor-pointer");
+          closeIcon.src = "../images/close-icon.png";
+
+          closeIcon.addEventListener("click", function (e) {
+            dateRange.remove();
+            button.remove();
+          });
+
+          dateRange.appendChild(closeIcon);
+          addedDate.appendChild(dateRange);
+
+          const button = document.createElement("button");
+          button.classList.add(
+            "max-w-3xl",
+            "w-full",
+            "block",
+            "mx-auto",
+            "p-5",
+            "border",
+            "border-gray-300",
+            "cursor-pointer"
+          );
+          button.textContent = "Reserve";
+
+          button.addEventListener("click", async () => {
+            const data = {
+              startDate: startDate.dataset.date,
+              endDate: endDate.dataset.date,
+            };
+
+            await fetch("/reservation", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(data),
+            });
+          });
+
+          addedDate.appendChild(button);
+
+          window.scrollTo(0, document.body.scrollHeight);
+        }
+      });
+
       tr.appendChild(td);
       currentDay.setDate(currentDay.getDate() + 1);
     }
@@ -145,6 +233,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     currentMonth = (currentMonth + 1) % 12;
     monthCount += 1;
+  }
+
+  function numberOfNights(startDate, endDate) {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+
+    start.setHours(0, 0, 0, 0);
+    end.setHours(0, 0, 0, 0);
+
+    const millisecondsPerNight = 1000 * 60 * 60 * 24;
+    const diffInMs = end - start;
+
+    return Math.floor(diffInMs / millisecondsPerNight);
   }
 
   // Navigate to next month on arrow click
