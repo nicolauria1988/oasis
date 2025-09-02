@@ -8,6 +8,7 @@ import mongoose from 'mongoose';
 import MongoStore from 'connect-mongo';
 import User from './data/User.js';
 import Location from './data/Location.js';
+import Reservation from './data/Reservation.js';
 import locationRoutes from './routes/locationRoutes.js';
 import reservationRoutes from './routes/reservationRoutes.js';
 import userRoutes from './routes/userRoutes.js';
@@ -122,8 +123,13 @@ const requireLogin = (req, res, next) => {
 // Account route
 app.get('/account', requireLogin, async (req, res) => {
   const userId = req.session.user._id;
-  const locations = await Location.find({ user: userId });
-  res.render('account', { locations });
+  const locations = await Location.find({ user: userId }).populate(
+    'reservations'
+  );
+  const reservations = await Reservation.find({ user: userId }).populate(
+    'location'
+  );
+  res.render('account', { locations, reservations });
 });
 
 // Location routes

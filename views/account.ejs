@@ -267,13 +267,13 @@
                 scope="col"
                 class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
               >
-                State
+                Zip Code
               </th>
               <th
                 scope="col"
                 class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
               >
-                Zip
+                State
               </th>
               <th
                 scope="col"
@@ -301,7 +301,124 @@
               </th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-solid divide-gray-200"></tbody>
+          <tbody class="divide-y divide-solid divide-gray-200">
+            <% reservations.forEach(reservation => { %>
+            <tr>
+              <td
+                scope="col"
+                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              >
+                Guest
+              </td>
+              <td
+                scope="col"
+                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              >
+                <%= reservation.location.street %>
+              </td>
+              <td
+                scope="col"
+                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              >
+                <%= reservation.location.city %>
+              </td>
+              <td
+                scope="col"
+                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              >
+                <%= reservation.location.zipCode %>
+              </td>
+              <td
+                scope="col"
+                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              >
+                <%= reservation.location.state %>
+              </td>
+              <td
+                scope="col"
+                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              >
+                <%= reservation.location.country %>
+              </td>
+              <td
+                scope="col"
+                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              >
+                <%= reservation.startDate.toISOString().split('T')[0] %>
+              </td>
+              <td
+                scope="col"
+                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              >
+                <%= reservation.endDate.toISOString().split('T')[0] %>
+              </td>
+              <td
+                scope="col"
+                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              >
+                <%= reservation.total %>
+              </td>
+            </tr>
+            <% }) %> <% locations.forEach(location => { %> <%
+            location.reservations.forEach(reservation => { %>
+            <tr>
+              <td
+                scope="col"
+                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              >
+                Host
+              </td>
+              <td
+                scope="col"
+                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              >
+                <%= location.street %>
+              </td>
+              <td
+                scope="col"
+                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              >
+                <%= location.city %>
+              </td>
+              <td
+                scope="col"
+                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              >
+                <%= location.zipCode %>
+              </td>
+              <td
+                scope="col"
+                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              >
+                <%= location.state %>
+              </td>
+              <td
+                scope="col"
+                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              >
+                <%= location.country %>
+              </td>
+              <td
+                scope="col"
+                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              >
+                <%= reservation.startDate.toISOString().split('T')[0] %>
+              </td>
+              <td
+                scope="col"
+                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              >
+                <%= reservation.endDate.toISOString().split('T')[0] %>
+              </td>
+              <td
+                scope="col"
+                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              >
+                <%= reservation.total %>
+              </td>
+            </tr>
+            <% }) %> <% }) %>
+          </tbody>
         </table>
       </div>
     </div>
