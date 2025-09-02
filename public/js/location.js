@@ -1,68 +1,70 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const mainImage = document.getElementById("main-image");
-  const thumbnails = document.querySelectorAll(".image-thumbnail");
+document.addEventListener('DOMContentLoaded', function () {
+  const mainImage = document.getElementById('main-image');
+  const thumbnails = document.querySelectorAll('.image-thumbnail');
 
   thumbnails.forEach(function (image) {
-    image.addEventListener("click", function (e) {
+    image.addEventListener('click', function (e) {
       mainImage.src = e.target.src;
     });
   });
 
-  const calendarDiv = document.getElementById("calendar");
-  // const availableDates = JSON.parse(calendarDiv.dataset.availableDates);
+  const calendarDiv = document.getElementById('calendar');
+  const availability = JSON.parse(availableDates);
+  const reservations = JSON.parse(reservedDates);
+  console.log(reservations);
 
   const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
   ];
 
   // Table Header (days of the week)
-  let daysTr = document.createElement("tr");
-  daysTr.classList.add("mb-10");
+  let daysTr = document.createElement('tr');
+  daysTr.classList.add('mb-10');
 
-  let sunday = document.createElement("th");
-  sunday.classList.add("pb-3");
-  sunday.innerText = "Sun";
+  let sunday = document.createElement('th');
+  sunday.classList.add('pb-3');
+  sunday.innerText = 'Sun';
   daysTr.appendChild(sunday);
 
-  let monday = document.createElement("th");
-  monday.classList.add("pb-3");
-  monday.innerText = "Mon";
+  let monday = document.createElement('th');
+  monday.classList.add('pb-3');
+  monday.innerText = 'Mon';
   daysTr.appendChild(monday);
 
-  let tuesday = document.createElement("th");
-  tuesday.classList.add("pb-3");
-  tuesday.innerText = "Tue";
+  let tuesday = document.createElement('th');
+  tuesday.classList.add('pb-3');
+  tuesday.innerText = 'Tue';
   daysTr.appendChild(tuesday);
 
-  let wednesday = document.createElement("th");
-  wednesday.classList.add("pb-3");
-  wednesday.innerText = "Wed";
+  let wednesday = document.createElement('th');
+  wednesday.classList.add('pb-3');
+  wednesday.innerText = 'Wed';
   daysTr.appendChild(wednesday);
 
-  let thursday = document.createElement("th");
-  thursday.classList.add("pb-3");
-  thursday.innerText = "Thu";
+  let thursday = document.createElement('th');
+  thursday.classList.add('pb-3');
+  thursday.innerText = 'Thu';
   daysTr.appendChild(thursday);
 
-  let friday = document.createElement("th");
-  friday.classList.add("pb-3");
-  friday.innerText = "Fri";
+  let friday = document.createElement('th');
+  friday.classList.add('pb-3');
+  friday.innerText = 'Fri';
   daysTr.appendChild(friday);
 
-  let saturday = document.createElement("th");
-  saturday.classList.add("pb-3");
-  saturday.innerText = "Sat";
+  let saturday = document.createElement('th');
+  saturday.classList.add('pb-3');
+  saturday.innerText = 'Sat';
   daysTr.appendChild(saturday);
 
   const today = new Date();
@@ -78,111 +80,129 @@ document.addEventListener("DOMContentLoaded", function () {
     let currentDay = new Date(today.getFullYear(), currentMonth, 1);
     let lastDay = new Date(today.getFullYear(), currentMonth + 1, 0);
 
-    let table = document.createElement("table");
-    table.classList.add("w-full", "mt-10");
+    let table = document.createElement('table');
+    table.classList.add('w-full', 'mt-10');
 
-    let tableCaption = document.createElement("caption");
-    tableCaption.classList.add("mx-auto", "mb-5");
+    let tableCaption = document.createElement('caption');
+    tableCaption.classList.add('mx-auto', 'mb-5');
     let monthHeading = months[currentMonth];
 
     let yearOffset = Math.floor((today.getMonth() + monthCount - 1) / 12);
     let displayYear = today.getFullYear() + yearOffset;
 
-    let arrowLeft = document.createElement("img");
+    let arrowLeft = document.createElement('img');
     arrowLeft.classList.add(
-      "inline-block",
-      "w-10",
-      "mr-5",
-      "cursor-pointer",
-      "arrow-left"
+      'inline-block',
+      'w-10',
+      'mr-5',
+      'cursor-pointer',
+      'arrow-left'
     );
-    arrowLeft.src = "../images/arrow-left.png";
+    arrowLeft.src = '../images/arrow-left.png';
     tableCaption.appendChild(arrowLeft);
 
-    let tableTitle = document.createElement("h1");
+    let tableTitle = document.createElement('h1');
     tableTitle.classList.add(
-      "text-2xl",
-      "text-center",
-      "inline-block",
-      "align-middle"
+      'text-2xl',
+      'text-center',
+      'inline-block',
+      'align-middle'
     );
     tableTitle.innerText = `${monthHeading}, ${displayYear}`;
     tableCaption.appendChild(tableTitle);
 
-    let arrowRight = document.createElement("img");
+    let arrowRight = document.createElement('img');
     arrowRight.classList.add(
-      "inline-block",
-      "w-10",
-      "ml-5",
-      "cursor-pointer",
-      "arrow-right"
+      'inline-block',
+      'w-10',
+      'ml-5',
+      'cursor-pointer',
+      'arrow-right'
     );
-    arrowRight.src = "../images/arrow-right.png";
+    arrowRight.src = '../images/arrow-right.png';
     tableCaption.appendChild(arrowRight);
 
     table.appendChild(tableCaption);
     table.appendChild(daysTr.cloneNode(true));
 
     if (monthCount != 1) {
-      table.classList.add("hidden");
+      table.classList.add('hidden');
     }
 
-    let tr = document.createElement("tr");
+    let tr = document.createElement('tr');
 
     while (currentDay <= lastDay) {
       if (tr.children.length == 7) {
         table.appendChild(tr);
-        tr = document.createElement("tr");
+        tr = document.createElement('tr');
       }
 
-      let td = document.createElement("td");
+      let td = document.createElement('td');
       td.classList.add(
-        "text-center",
-        "p-3",
-        "border",
-        "border-gray-300",
-        "cursor-pointer"
+        'text-center',
+        'p-3',
+        'border',
+        'border-gray-300',
+        'cursor-pointer'
       );
-      const dateString = currentDay.toISOString().split("T")[0];
-      td.dataset.date = dateString;
-      td.innerText = dateString.split("-")[2];
 
-      td.addEventListener("click", function (e) {
-        if (new Date(e.target.dataset.date) <= today) {
+      if (
+        currentDay <= today ||
+        !isDateInRange(currentDay, availability) ||
+        isDateInRange(currentDay, reservations)
+      ) {
+        td.classList.add('bg-gray-100');
+      }
+
+      const dateString = currentDay.toISOString().split('T')[0];
+      td.dataset.date = dateString;
+      td.innerText = dateString.split('-')[2];
+
+      td.addEventListener('click', function (e) {
+        const tdDate = new Date(e.target.dataset.date);
+
+        if (
+          tdDate <= today ||
+          !isDateInRange(tdDate, availability) ||
+          isDateInRange(tdDate, reservations)
+        ) {
           return;
         }
 
         if (!startDate) {
-          e.target.style.backgroundColor = "aliceblue";
+          e.target.style.backgroundColor = 'aliceblue';
           startDate = e.target;
-        } else {
-          let addedDate = document.getElementById("added-date");
-          let dateRange = document.createElement("div");
+        } else if (!endDate) {
+          let addedDate = document.getElementById('added-date');
+          let dateRange = document.createElement('div');
           dateRange.classList.add(
-            "max-w-3xl",
-            "mx-auto",
-            "p-5",
-            "border",
-            "border-gray-300",
-            "flex",
-            "justify-between",
-            "items-center",
-            "mb-5"
+            'max-w-3xl',
+            'mx-auto',
+            'p-5',
+            'border',
+            'border-gray-300',
+            'flex',
+            'justify-between',
+            'items-center',
+            'mb-5'
           );
           endDate = e.target;
-          startDate.style.backgroundColor = "#fff";
+          startDate.style.backgroundColor = '#fff';
 
           const price =
-            Number(document.getElementById("price").dataset.price) *
-            numberOfNights(startDate.dataset.date, endDate.dataset.date);
+            Number(document.getElementById('price').dataset.price) *
+              numberOfNights(startDate.dataset.date, endDate.dataset.date) ||
+            Number(document.getElementById('price').dataset.price);
 
           dateRange.innerText = `${startDate.dataset.date} - ${endDate.dataset.date} ($${price})`;
 
-          const closeIcon = document.createElement("img");
-          closeIcon.classList.add("w-5", "cursor-pointer");
-          closeIcon.src = "../images/close-icon.png";
+          const closeIcon = document.createElement('img');
+          closeIcon.classList.add('w-5', 'cursor-pointer');
+          closeIcon.src = '../images/close-icon.png';
 
-          closeIcon.addEventListener("click", function (e) {
+          closeIcon.addEventListener('click', function (e) {
+            startDate = null;
+            endDate = null;
             dateRange.remove();
             button.remove();
           });
@@ -190,20 +210,20 @@ document.addEventListener("DOMContentLoaded", function () {
           dateRange.appendChild(closeIcon);
           addedDate.appendChild(dateRange);
 
-          const button = document.createElement("button");
+          const button = document.createElement('button');
           button.classList.add(
-            "max-w-3xl",
-            "w-full",
-            "block",
-            "mx-auto",
-            "p-5",
-            "border",
-            "border-gray-300",
-            "cursor-pointer"
+            'max-w-3xl',
+            'w-full',
+            'block',
+            'mx-auto',
+            'p-5',
+            'border',
+            'border-gray-300',
+            'cursor-pointer'
           );
-          button.textContent = "Reserve";
+          button.textContent = 'Reserve';
 
-          button.addEventListener("click", async () => {
+          button.addEventListener('click', async () => {
             const data = {
               user: userId,
               location: locationId,
@@ -212,21 +232,23 @@ document.addEventListener("DOMContentLoaded", function () {
               total: price,
             };
 
-            await fetch("/reservation", {
-              method: "POST",
+            await fetch('/reservation', {
+              method: 'POST',
               headers: {
-                "Content-Type": "application/json",
-                "X-CSRF-Token": csrfToken,
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': csrfToken,
               },
               body: JSON.stringify(data),
             });
 
-            window.location.href = "/account";
+            window.location.href = '/account';
           });
 
           addedDate.appendChild(button);
 
           window.scrollTo(0, document.body.scrollHeight);
+        } else {
+          return;
         }
       });
 
@@ -245,37 +267,50 @@ document.addEventListener("DOMContentLoaded", function () {
     const start = new Date(startDate);
     const end = new Date(endDate);
 
-    start.setHours(0, 0, 0, 0);
-    end.setHours(0, 0, 0, 0);
+    const diffTime = Math.abs(start - end);
 
-    const millisecondsPerNight = 1000 * 60 * 60 * 24;
-    const diffInMs = end - start;
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-    return Math.floor(diffInMs / millisecondsPerNight);
+    return diffDays;
   }
 
   // Navigate to next month on arrow click
-  const tables = document.querySelectorAll("#calendar table");
+  const tables = document.querySelectorAll('#calendar table');
 
   let currentTableIndex = 0;
 
   function updateTableVisibility(newIndex) {
-    tables[currentTableIndex].classList.add("hidden");
-    tables[newIndex].classList.remove("hidden");
+    tables[currentTableIndex].classList.add('hidden');
+    tables[newIndex].classList.remove('hidden');
     currentTableIndex = newIndex;
   }
 
-  tables.forEach((table, index) => {
-    const caption = table.querySelector("caption");
-    const leftArrow = caption.querySelector(".arrow-left");
-    const rightArrow = caption.querySelector(".arrow-right");
+  function isDateInRange(date, ranges) {
+    const d = new Date(date);
 
-    leftArrow.addEventListener("click", function () {
+    for (const range of ranges) {
+      const start = new Date(range.startDate);
+      const end = new Date(range.endDate);
+
+      if (d >= start && d <= end) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  tables.forEach((table, index) => {
+    const caption = table.querySelector('caption');
+    const leftArrow = caption.querySelector('.arrow-left');
+    const rightArrow = caption.querySelector('.arrow-right');
+
+    leftArrow.addEventListener('click', function () {
       if (currentTableIndex === 0) return;
       updateTableVisibility(currentTableIndex - 1);
     });
 
-    rightArrow.addEventListener("click", function () {
+    rightArrow.addEventListener('click', function () {
       if (currentTableIndex === tables.length - 1) return;
       updateTableVisibility(currentTableIndex + 1);
     });

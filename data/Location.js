@@ -1,6 +1,6 @@
 // models/Location.js
 
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const { Schema, model } = mongoose;
 
@@ -8,8 +8,14 @@ const locationSchema = new Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: 'User',
     },
+    reservations: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Reservation',
+      },
+    ],
     street: {
       type: String,
       required: true,
@@ -48,11 +54,16 @@ const locationSchema = new Schema(
       minlength: 100,
       maxlength: 600,
     },
-    availableDates: [{ type: Object }],
+    availableDates: [
+      {
+        startDate: { type: String },
+        endDate: { type: String },
+      },
+    ],
   },
   { timestamps: true }
 );
 
-const Location = model("Location", locationSchema);
+const Location = model('Location', locationSchema);
 
 export default Location;

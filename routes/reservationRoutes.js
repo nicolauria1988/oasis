@@ -1,13 +1,14 @@
-import express from "express";
-import mongoose from "mongoose";
-import Reservation from "../data/Reservation.js";
+import express from 'express';
+// import mongoose from 'mongoose';
+import Reservation from '../data/Reservation.js';
+import Location from '../data/Location.js';
 
 const router = express.Router();
 
-router.post("/reservation", async (req, res) => {
+router.post('/reservation', async (req, res) => {
   const { user, location, startDate, endDate, total } = req.body;
 
-  await new Reservation({
+  const reservation = await new Reservation({
     user,
     location,
     startDate: new Date(startDate),
@@ -15,7 +16,11 @@ router.post("/reservation", async (req, res) => {
     total,
   }).save();
 
-  res.redirect("/account");
+  await Location.findByIdAndUpdate(location, {
+    $push: { reservations: reservation._id },
+  });
+
+  res.redirect('/account');
 });
 
 export default router;

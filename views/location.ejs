@@ -109,12 +109,12 @@
       <% } %>
     </div>
     <script src="/js/header.js"></script>
-    <script>
-      const userId = "<%= user._id %>";
-      const locationId = "<%= location._id %>";
-    </script>
-    <script>
-      const csrfToken = "<%= csrfToken %>";
+    <script type="text/javascript">
+      const userId = '<%= user._id %>';
+      const locationId = '<%= location._id %>';
+      const availableDates = '<%- JSON.stringify(location.availableDates) %>';
+      const reservedDates = '<%- JSON.stringify(location.reservations) %>';
+      const csrfToken = '<%= csrfToken %>';
     </script>
     <script src="/js/location.js"></script>
   </body>
