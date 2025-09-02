@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Oasis</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <%- include('header.ejs') %>
+
+    <div
+      class="min-h-[calc(100vh_-_100px)] flex flex-col justify-center items-center px-10 py-5"
+    >
+      <h2 class="text-xl w-full text-start mt-5 sm:mt-0 mb-2">Add Location</h2>
+      <p class="w-full text-lg mb-5 text-start text-gray-500">
+        After save you can set availability from the account dashboard.
+      </p>
+      <form
+        action="/location"
+        method="POST"
+        enctype="multipart/form-data"
+        class="w-full"
+      >
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+        <div
+          class="flex flex-col flex-wrap sm:flex-row justify-center items-center gap-5"
+        >
+          <input
+            type="text"
+            name="street"
+            placeholder="Street"
+            class="w-full block p-3 outline-1 outline-gray-300 basis-[calc(100%-10px)] sm:basis-[calc(50%-10px)]"
+            required
+          />
+
+          <input
+            type="text"
+            name="city"
+            placeholder="City"
+            class="w-full block p-3 outline-1 outline-gray-300 basis-[calc(100%-10px)] sm:basis-[calc(50%-10px)]"
+            required
+          />
+
+          <input
+            type="text"
+            name="state"
+            placeholder="State"
+            class="w-full block p-3 outline-1 outline-gray-300 basis-[calc(100%-10px)] sm:basis-[calc(50%-10px)]"
+            required
+          />
+
+          <input
+            type="text"
+            name="zipCode"
+            placeholder="Zip Code"
+            class="w-full block p-3 outline-1 outline-gray-300 basis-[calc(100%-10px)] sm:basis-[calc(50%-10px)]"
+            required
+          />
+
+          <input
+            type="text"
+            name="country"
+            placeholder="Country"
+            class="w-full block p-3 outline-1 outline-gray-300 basis-[calc(100%-10px)] sm:basis-[calc(50%-10px)]"
+            required
+          />
+
+          <input
+            type="text"
+            name="price"
+            placeholder="Price"
+            class="w-full block p-3 outline-1 outline-gray-300 basis-[calc(100%-10px)] sm:basis-[calc(50%-10px)]"
+            required
+          />
+
+          <div
+            id="image-div"
+            class="w-full p-3 outline-1 outline-gray-300 cursor-pointer flex items-center gap-5"
+          >
+            <p>Upload images (5 required)</p>
+          </div>
+
+          <input
+            type="file"
+            name="images"
+            accept="image/*"
+            placeholder="Images"
+            id="image-files"
+            class="hide w-full block p-3 outline-1 outline-gray-300 basis-[calc(100%-10px)] sm:basis-[calc(50%-10px)]"
+            multiple
+            required
+          />
+
+          <textarea
+            name="notes"
+            class="w-full block p-3 outline-1 outline-gray-300 basis-[100%]"
+            rows="8"
+            cols="50"
+            placeholder="Notes"
+          ></textarea>
+
+          <input
+            type="submit"
+            value="Submit"
+            class="mb-5 sm:mb-0 w-full block p-3 outline-1 outline-gray-300 cursor-pointer"
+          />
+        </div>
+      </form>
+    </div>
+
+    <!-- <script>
+      document.querySelector('form').addEventListener('submit', function (e) {
+        const csrfToken = document.querySelector('input[name="_csrf"]').value;
+
+        const form = e.target;
+        const xhr = new XMLHttpRequest();
+        xhr.open(form.method, form.action, true);
+        xhr.setRequestHeader('X-CSRF-Token', csrfToken);
+        xhr.withCredentials = true;
+
+        const formData = new FormData(form);
+        xhr.onload = function () {
+          window.location.href = '/account';
+        };
+        xhr.send(formData);
+
+        e.preventDefault();
+      });
+    </script> -->
+
+    <script src="/js/images.js"></script>
+    <script src="/js/header.js"></script>
+  </body>
+</html>

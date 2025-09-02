@@ -1,5 +1,4 @@
 import express from 'express';
-// import mongoose from 'mongoose';
 import Reservation from '../data/Reservation.js';
 import Location from '../data/Location.js';
 
