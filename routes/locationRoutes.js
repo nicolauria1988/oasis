@@ -84,4 +84,67 @@ router.post('/location', requireLogin, async (req, res) => {
   res.redirect('/account');
 });
 
+router.get('/location/:id/edit', async (req, res) => {
+  const locationId = req.params.id;
+  const location = await Location.findById(locationId);
+  res.render('editLocation', { location });
+});
+
+router.put('/location/:id', async (req, res) => {
+  const locationId = req.params.id;
+  const location = await Location.findById(locationId);
+
+  const { street, city, state, zipCode, country, price, notes } = req.body;
+
+  const uploadDir = path.join(process.cwd(), 'public/images');
+  ensureUploadDir(uploadDir);
+
+  let images = req.files?.images;
+
+  if (images && !Array.isArray(images)) {
+    images = [images];
+  }
+
+  const imagePaths = [];
+
+  if (images) {
+    for (const file of images) {
+      // Validate mimetype
+      if (!file.mimetype.startsWith('image/')) {
+        return res.status(400).send('Only image files are allowed!');
+      }
+
+      // Generate unique filename
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+      const ext = path.extname(file.name);
+      const filename = `${file.fieldname || 'image'}-${uniqueSuffix}${ext}`;
+
+      const savePath = path.join(uploadDir, filename);
+
+      // Move the file to the upload directory
+      await file.mv(savePath);
+
+      imagePaths.push(filename);
+    }
+  }
+
+  const updateData = {
+    street,
+    city,
+    state,
+    zipCode,
+    country,
+    price,
+    notes,
+  };
+
+  if (imagePaths.length > 0) {
+    updateData.images = imagePaths;
+  }
+
+  await Location.findByIdAndUpdate(locationId, updateData);
+
+  res.redirect('/account');
+});
+
 export default router;

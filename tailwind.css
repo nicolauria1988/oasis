@@ -1,8 +1,8 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @font-face {
-  font-family: "Open Sans";
-  src: url("/open-sans.ttf");
+  font-family: 'Open Sans';
+  src: url('/open-sans.ttf');
 }
 
 @theme {
@@ -11,9 +11,14 @@
 }
 
 body {
-  font-family: "Open Sans";
+  font-family: 'Open Sans';
 }
 
 .hide {
   display: none;
+}
+
+th,
+td {
+  white-space: nowrap;
 }

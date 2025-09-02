@@ -10,6 +10,7 @@ import Location from './data/Location.js';
 import locationRoutes from './routes/locationRoutes.js';
 import reservationRoutes from './routes/reservationRoutes.js';
 import fileUpload from 'express-fileupload';
+import methodOverride from 'method-override';
 import csrf from 'csurf';
 import dotenv from 'dotenv';
 
@@ -73,6 +74,15 @@ app.use(
   })
 );
 
+// Support _method in POST forms
+app.use(
+  methodOverride((req) => {
+    if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+      return req.body._method;
+    }
+  })
+);
+
 // CSRF protection
 const csrfProtection = csrf();
 app.use(csrfProtection);
@@ -103,8 +113,10 @@ const requireLogin = (req, res, next) => {
 };
 
 // Account route
-app.get('/account', requireLogin, (req, res) => {
-  res.render('account');
+app.get('/account', requireLogin, async (req, res) => {
+  const userId = req.session.user._id;
+  const locations = await Location.find({ user: userId });
+  res.render('account', { locations });
 });
 
 // Location routes

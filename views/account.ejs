@@ -109,12 +109,6 @@
                 scope="col"
                 class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
               >
-                Type
-              </th>
-              <th
-                scope="col"
-                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-              >
                 Price
               </th>
               <th
@@ -131,7 +125,60 @@
               </th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-solid divide-gray-200"></tbody>
+          <tbody class="divide-y divide-solid divide-gray-200">
+            <% locations.forEach(location => { %>
+            <tr>
+              <td
+                scope="col"
+                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              >
+                <%= location.street %>
+              </td>
+              <td
+                scope="col"
+                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              >
+                <%= location.city %>
+              </td>
+              <td
+                scope="col"
+                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              >
+                <%= location.zipCode %>
+              </td>
+              <td
+                scope="col"
+                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              >
+                <%= location.state %>
+              </td>
+              <td
+                scope="col"
+                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              >
+                <%= location.country %>
+              </td>
+              <td
+                scope="col"
+                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              >
+                <%= location.price %>
+              </td>
+              <td
+                scope="col"
+                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              >
+                4.7 (100 reviews)
+              </td>
+              <td
+                scope="col"
+                class="px-3 py-3.5 text-right text-sm font-semibold text-primary"
+              >
+                <a href="/location/<%= location._id %>/edit">Edit</a>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
         </table>
       </div>
 

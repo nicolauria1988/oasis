@@ -672,14 +672,17 @@
   }
 }
 @font-face {
-  font-family: "Open Sans";
-  src: url("/open-sans.ttf");
+  font-family: 'Open Sans';
+  src: url('/open-sans.ttf');
 }
 body {
-  font-family: "Open Sans";
+  font-family: 'Open Sans';
 }
 .hide {
   display: none;
+}
+th, td {
+  white-space: nowrap;
 }
 @property --tw-divide-y-reverse {
   syntax: "*";

@@ -14,14 +14,15 @@
     >
       <h2 class="text-xl w-full text-start mt-5 sm:mt-0 mb-2">Add Location</h2>
       <p class="w-full text-lg mb-5 text-start text-gray-500">
-        After save you can set availability from the account dashboard.
+        You can set availability from the account dashboard.
       </p>
       <form
-        action="/location"
+        action="/location/<%= location._id %>"
         method="POST"
         enctype="multipart/form-data"
         class="w-full"
       >
+        <input type="hidden" name="_method" value="PUT" />
         <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
         <div
           class="flex flex-col flex-wrap sm:flex-row justify-center items-center gap-5"
@@ -29,6 +30,7 @@
           <input
             type="text"
             name="street"
+            value="<%= location.street %>"
             placeholder="Street"
             class="w-full block p-3 outline-1 outline-gray-300 basis-[calc(100%-10px)] sm:basis-[calc(50%-10px)]"
             required
@@ -37,6 +39,7 @@
           <input
             type="text"
             name="city"
+            value="<%= location.city %>"
             placeholder="City"
             class="w-full block p-3 outline-1 outline-gray-300 basis-[calc(100%-10px)] sm:basis-[calc(50%-10px)]"
             required
@@ -45,6 +48,7 @@
           <input
             type="text"
             name="state"
+            value="<%= location.state %>"
             placeholder="State"
             class="w-full block p-3 outline-1 outline-gray-300 basis-[calc(100%-10px)] sm:basis-[calc(50%-10px)]"
             required
@@ -53,6 +57,7 @@
           <input
             type="text"
             name="zipCode"
+            value="<%= location.zipCode %>"
             placeholder="Zip Code"
             class="w-full block p-3 outline-1 outline-gray-300 basis-[calc(100%-10px)] sm:basis-[calc(50%-10px)]"
             required
@@ -61,6 +66,7 @@
           <input
             type="text"
             name="country"
+            value="<%= location.country %>"
             placeholder="Country"
             class="w-full block p-3 outline-1 outline-gray-300 basis-[calc(100%-10px)] sm:basis-[calc(50%-10px)]"
             required
@@ -69,6 +75,7 @@
           <input
             type="text"
             name="price"
+            value="<%= location.price %>"
             placeholder="Price"
             class="w-full block p-3 outline-1 outline-gray-300 basis-[calc(100%-10px)] sm:basis-[calc(50%-10px)]"
             required
@@ -89,7 +96,6 @@
             id="image-files"
             class="hide w-full block p-3 outline-1 outline-gray-300 basis-[calc(100%-10px)] sm:basis-[calc(50%-10px)]"
             multiple
-            required
           />
 
           <textarea
@@ -98,7 +104,9 @@
             rows="8"
             cols="50"
             placeholder="Notes"
-          ></textarea>
+          >
+<%= location.notes %></textarea
+          >
 
           <input
             type="submit"
