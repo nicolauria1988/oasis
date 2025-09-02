@@ -89,9 +89,17 @@ router.get('/location/:id/edit', async (req, res) => {
 
 router.put('/location/:id', async (req, res) => {
   const locationId = req.params.id;
-  const location = await Location.findById(locationId);
 
-  const { street, city, state, zipCode, country, price, notes } = req.body;
+  const {
+    street,
+    city,
+    state,
+    zipCode,
+    country,
+    price,
+    notes,
+    availableDates,
+  } = req.body;
 
   const uploadDir = path.join(process.cwd(), 'public/images');
   ensureUploadDir(uploadDir);
@@ -135,6 +143,10 @@ router.put('/location/:id', async (req, res) => {
     notes,
   };
 
+  if ('availableDates' in req.body) {
+    updateData.availableDates = availableDates;
+  }
+
   if (imagePaths.length > 0) {
     updateData.images = imagePaths;
   }
@@ -142,6 +154,12 @@ router.put('/location/:id', async (req, res) => {
   await Location.findByIdAndUpdate(locationId, updateData);
 
   res.redirect('/account');
+});
+
+router.get('/location/:id/availability', requireLogin, async (req, res) => {
+  const locationId = req.params.id;
+  const location = await Location.findById(locationId).populate('reservations');
+  res.render('availability', { location });
 });
 
 export default router;

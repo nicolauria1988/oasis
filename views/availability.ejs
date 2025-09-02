@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Oasis</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <%- include('header.ejs') %>
+    <div class="px-10 py-5">
+      <h2 class="text-xl w-full text-center mt-10 mb-2">Add Availability</h2>
+      <p class="w-full text-lg mb-5 text-center text-gray-500">
+        Select a start date and end date by clicking calendar dates.
+      </p>
+      <div
+        id="calendar"
+        data-availableDates="<%= JSON.stringify(location.availableDates || []) %>"
+        class="mt-5 mb-5 max-w-3xl mx-auto"
+      ></div>
+      <div id="added-date"></div>
+    </div>
+
+    <script src="/js/header.js"></script>
+    <script type="text/javascript">
+      // const userId = '<%= user ? user._id : null %>';
+      const locationId = '<%= location._id %>';
+      const availableDates = '<%- JSON.stringify(location.availableDates) %>';
+      const reservedDates = '<%- JSON.stringify(location.reservations) %>';
+      const csrfToken = '<%= csrfToken %>';
+    </script>
+    <script src="/js/availability.js"></script>
+  </body>
+</html>

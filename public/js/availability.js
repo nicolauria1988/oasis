@@ -1,13 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-  const mainImage = document.getElementById('main-image');
-  const thumbnails = document.querySelectorAll('.image-thumbnail');
-
-  thumbnails.forEach(function (image) {
-    image.addEventListener('click', function (e) {
-      mainImage.src = e.target.src;
-    });
-  });
-
   const calendarDiv = document.getElementById('calendar');
   const availability = JSON.parse(availableDates);
   const reservations = JSON.parse(reservedDates);
@@ -75,6 +66,95 @@ document.addEventListener('DOMContentLoaded', function () {
   let startDate = null;
   let endDate = null;
 
+  // If availability is already set
+  if (availability) {
+    startDate = availability[0].startDate;
+    endDate = availability[0].endDate;
+  }
+
+  // Create Div to hold added date and submit button
+  let addedDate = document.getElementById('added-date');
+  let dateRange = document.createElement('div');
+  dateRange.classList.add(
+    'max-w-3xl',
+    'mx-auto',
+    'p-5',
+    'border',
+    'border-gray-300',
+    'flex',
+    'justify-between',
+    'items-center',
+    'mb-5'
+  );
+
+  const closeIcon = document.createElement('img');
+  closeIcon.classList.add('w-5', 'cursor-pointer');
+  closeIcon.src = '/images/close-icon.png';
+
+  closeIcon.addEventListener('click', function (e) {
+    startDate = null;
+    endDate = null;
+    dateRange.remove();
+  });
+
+  const button = document.createElement('button');
+  button.classList.add(
+    'max-w-3xl',
+    'w-full',
+    'block',
+    'mx-auto',
+    'p-5',
+    'border',
+    'border-gray-300',
+    'cursor-pointer'
+  );
+  button.textContent = 'Save';
+
+  button.addEventListener('click', async () => {
+    let data;
+
+    if (typeof startDate === 'string' || !startDate) {
+      data = {
+        availableDates: [
+          {
+            startDate: startDate,
+            endDate: endDate,
+          },
+        ],
+      };
+    } else {
+      data = {
+        availableDates: [
+          {
+            startDate: startDate.dataset.date,
+            endDate: endDate.dataset.date,
+          },
+        ],
+      };
+    }
+
+    await fetch(`/location/${locationId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': csrfToken,
+      },
+      body: JSON.stringify(data),
+    });
+
+    window.location.href = '/account';
+  });
+
+  if (startDate && endDate) {
+    dateRange.innerText = `${startDate} - ${endDate}`;
+
+    dateRange.appendChild(closeIcon);
+    addedDate.appendChild(dateRange);
+    addedDate.appendChild(button);
+
+    window.scrollTo(0, document.body.scrollHeight);
+  }
+
   while (monthCount <= 12) {
     let currentDay = new Date(today.getFullYear(), currentMonth, 1);
     let lastDay = new Date(today.getFullYear(), currentMonth + 1, 0);
@@ -97,7 +177,7 @@ document.addEventListener('DOMContentLoaded', function () {
       'cursor-pointer',
       'arrow-left'
     );
-    arrowLeft.src = '../images/arrow-left.png';
+    arrowLeft.src = '/images/arrow-left.png';
     tableCaption.appendChild(arrowLeft);
 
     let tableTitle = document.createElement('h1');
@@ -118,7 +198,7 @@ document.addEventListener('DOMContentLoaded', function () {
       'cursor-pointer',
       'arrow-right'
     );
-    arrowRight.src = '../images/arrow-right.png';
+    arrowRight.src = '/images/arrow-right.png';
     tableCaption.appendChild(arrowRight);
 
     table.appendChild(tableCaption);
@@ -145,26 +225,18 @@ document.addEventListener('DOMContentLoaded', function () {
         'cursor-pointer'
       );
 
-      if (
-        currentDay <= today ||
-        !isDateInRange(currentDay, availability) ||
-        isDateInRange(currentDay, reservations)
-      ) {
-        td.classList.add('bg-gray-100');
-      }
-
       const dateString = currentDay.toISOString().split('T')[0];
       td.dataset.date = dateString;
       td.innerText = dateString.split('-')[2];
 
+      if (currentDay <= today || isDateInRange(currentDay, reservations)) {
+        td.classList.add('bg-gray-100');
+      }
+
       td.addEventListener('click', function (e) {
         const tdDate = new Date(e.target.dataset.date);
 
-        if (
-          tdDate <= today ||
-          !isDateInRange(tdDate, availability) ||
-          isDateInRange(tdDate, reservations)
-        ) {
+        if (tdDate <= today || isDateInRange(tdDate, reservations)) {
           return;
         }
 
@@ -172,77 +244,13 @@ document.addEventListener('DOMContentLoaded', function () {
           e.target.style.backgroundColor = 'aliceblue';
           startDate = e.target;
         } else if (!endDate) {
-          let addedDate = document.getElementById('added-date');
-          let dateRange = document.createElement('div');
-          dateRange.classList.add(
-            'max-w-3xl',
-            'mx-auto',
-            'p-5',
-            'border',
-            'border-gray-300',
-            'flex',
-            'justify-between',
-            'items-center',
-            'mb-5'
-          );
-          endDate = e.target;
           startDate.style.backgroundColor = '#fff';
+          endDate = e.target;
 
-          const price =
-            Number(document.getElementById('price').dataset.price) *
-              numberOfNights(startDate.dataset.date, endDate.dataset.date) ||
-            Number(document.getElementById('price').dataset.price);
-
-          dateRange.innerText = `${startDate.dataset.date} - ${endDate.dataset.date} ($${price})`;
-
-          const closeIcon = document.createElement('img');
-          closeIcon.classList.add('w-5', 'cursor-pointer');
-          closeIcon.src = '../images/close-icon.png';
-
-          closeIcon.addEventListener('click', function (e) {
-            startDate = null;
-            endDate = null;
-            dateRange.remove();
-            button.remove();
-          });
+          dateRange.innerText = `${startDate.dataset.date} - ${endDate.dataset.date}`;
 
           dateRange.appendChild(closeIcon);
           addedDate.appendChild(dateRange);
-
-          const button = document.createElement('button');
-          button.classList.add(
-            'max-w-3xl',
-            'w-full',
-            'block',
-            'mx-auto',
-            'p-5',
-            'border',
-            'border-gray-300',
-            'cursor-pointer'
-          );
-          button.textContent = 'Reserve';
-
-          button.addEventListener('click', async () => {
-            const data = {
-              user: userId,
-              location: locationId,
-              startDate: startDate.dataset.date,
-              endDate: endDate.dataset.date,
-              total: price,
-            };
-
-            await fetch('/reservation', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-Token': csrfToken,
-              },
-              body: JSON.stringify(data),
-            });
-
-            window.location.href = '/account';
-          });
-
           addedDate.appendChild(button);
 
           window.scrollTo(0, document.body.scrollHeight);
@@ -260,17 +268,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     currentMonth = (currentMonth + 1) % 12;
     monthCount += 1;
-  }
-
-  function numberOfNights(startDate, endDate) {
-    const start = new Date(startDate);
-    const end = new Date(endDate);
-
-    const diffTime = Math.abs(start - end);
-
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-    return diffDays;
   }
 
   // Navigate to next month on arrow click
