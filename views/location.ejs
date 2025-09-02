@@ -110,7 +110,7 @@
     </div>
     <script src="/js/header.js"></script>
     <script type="text/javascript">
-      const userId = '<%= user._id %>';
+      const userId = '<%= user ? user._id : null %>';
       const locationId = '<%= location._id %>';
       const availableDates = '<%- JSON.stringify(location.availableDates) %>';
       const reservedDates = '<%- JSON.stringify(location.reservations) %>';

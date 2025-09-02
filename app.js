@@ -6,9 +6,11 @@ import cookieParser from 'cookie-parser';
 import authRoutes from './routes/auth.js';
 import mongoose from 'mongoose';
 import MongoStore from 'connect-mongo';
+import User from './data/User.js';
 import Location from './data/Location.js';
 import locationRoutes from './routes/locationRoutes.js';
 import reservationRoutes from './routes/reservationRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 import fileUpload from 'express-fileupload';
 import methodOverride from 'method-override';
 import csrf from 'csurf';
@@ -88,8 +90,13 @@ const csrfProtection = csrf();
 app.use(csrfProtection);
 
 // Middleware for user and csrfToken
-app.use((req, res, next) => {
-  res.locals.user = req.session.user || null;
+app.use(async (req, res, next) => {
+  if (req.session.user && req.session.user._id) {
+    const fullUser = await User.findById(req.session.user._id).lean();
+    res.locals.user = fullUser || null;
+  } else {
+    res.locals.user = null;
+  }
   res.locals.csrfToken = req.csrfToken();
   next();
 });
@@ -124,5 +131,8 @@ app.use(locationRoutes);
 
 // Reservation routes
 app.use(reservationRoutes);
+
+// User routes
+app.use(userRoutes);
 
 export default app;

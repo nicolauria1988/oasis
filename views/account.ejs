@@ -49,6 +49,12 @@
                 scope="col"
                 class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
               >
+                Zip Code
+              </th>
+              <th
+                scope="col"
+                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              >
                 State
               </th>
               <th
@@ -57,15 +63,66 @@
               >
                 Country
               </th>
-              <th
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-solid divide-gray-200">
+            <tr>
+              <td
                 scope="col"
                 class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
               >
-                Zip
-              </th>
+                <%= user.email %>
+              </td>
+              <td
+                scope="col"
+                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              >
+                <%= user.name %>
+              </td>
+              <td
+                scope="col"
+                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              >
+                <%= user.phone %>
+              </td>
+              <td
+                scope="col"
+                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              >
+                <%= user.street %>
+              </td>
+              <td
+                scope="col"
+                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              >
+                <%= user.city %>
+              </td>
+              <td
+                scope="col"
+                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              >
+                <%= user.zipCode %>
+              </td>
+              <td
+                scope="col"
+                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              >
+                <%= user.state %>
+              </td>
+              <td
+                scope="col"
+                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              >
+                <%= user.country %>
+              </td>
+              <td
+                scope="col"
+                class="px-3 py-3.5 text-right text-sm font-semibold text-primary"
+              >
+                <a href="/user/<%= user._id %>/edit">Edit</a>
+              </td>
             </tr>
-          </thead>
-          <tbody class="divide-y divide-solid divide-gray-200"></tbody>
+          </tbody>
         </table>
       </div>
 
@@ -91,7 +148,7 @@
                 scope="col"
                 class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
               >
-                Zip
+                Zip Code
               </th>
               <th
                 scope="col"

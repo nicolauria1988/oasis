@@ -1,7 +1,6 @@
 import express from 'express';
 import path from 'path';
 import fs from 'fs';
-// import csrf from 'csurf';
 import Location from '../data/Location.js';
 
 const router = express.Router();
@@ -14,8 +13,6 @@ const requireLogin = (req, res, next) => {
   }
 };
 
-// const csrfProtection = csrf();
-
 // Middleware to ensure the upload directory exists
 const ensureUploadDir = (dir) => {
   if (!fs.existsSync(dir)) {
@@ -24,7 +21,7 @@ const ensureUploadDir = (dir) => {
 };
 
 router.get('/location/new', requireLogin, async (req, res) => {
-  res.render('addLocation', { csrfToken: req.csrfToken() });
+  res.render('addLocation');
 });
 
 router.get('/location/:id', async (req, res) => {
