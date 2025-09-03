@@ -20,17 +20,16 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
-const port = 3000;
 
 // Connect to MongoDB and start the Express server
-mongoose.connect('mongodb://localhost:27017/oasis');
+mongoose.connect(process.env.MONGODB_URI);
 
 const db = mongoose.connection;
 
 db.once('open', () => {
   console.log('MongoDB connected successfully');
 
-  app.listen(port, () => {
+  app.listen(process.env.PORT, () => {
     console.log('Server running on port 3000');
   });
 });
