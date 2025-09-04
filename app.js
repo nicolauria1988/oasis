@@ -41,6 +41,10 @@ app.set('views', path.join('views'));
 // Set HTML cookies
 app.use(cookieParser());
 
+if (process.env.NODE_ENV === 'production') {
+  app.set('trust proxy', 1);
+}
+
 // Set the session for a user
 app.use(
   session({
