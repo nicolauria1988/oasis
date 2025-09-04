@@ -50,6 +50,8 @@ app.use(
     saveUninitialized: false,
     cookie: {
       expires: 7 * 24 * 60 * 60 * 1000,
+      sameSite: 'lax',
+      secure: process.env.NODE_ENV === 'production',
     },
     store: MongoStore.create({
       mongoUrl: 'mongodb://localhost:27017/oasis',
