@@ -112,7 +112,7 @@ app.use(async (req, res, next) => {
 // Home route
 app.get('/', async (req, res) => {
   const locations = await Location.find({});
-  res.render('index', { locations });
+  res.render('index', { locations, ...res.locals });
 });
 
 // Set Register and Login auth routes
@@ -136,7 +136,7 @@ app.get('/account', requireLogin, async (req, res) => {
   const reservations = await Reservation.find({ user: userId }).populate(
     'location'
   );
-  res.render('account', { locations, reservations });
+  res.render('account', { locations, reservations, ...res.locals });
 });
 
 // Location routes
