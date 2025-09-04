@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <%- include('header.ejs', { user }) %>
+    <%- include('header.ejs', { user: locals.user }) %>
 
     <div class="min-h-[calc(100vh_-_100px)] px-10 py-5">
       <h2 class="text-xl w-full text-start mt-5 sm:mt-0 mb-5">Edit Profile</h2>

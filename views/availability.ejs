@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <%- include('header.ejs', { user }) %>
+    <%- include('header.ejs', { user: locals.user }) %>
     <div class="px-10 py-5">
       <h2 class="text-xl w-full text-center mt-10 mb-2">Add Availability</h2>
       <p class="w-full text-lg mb-5 text-center text-gray-500">
