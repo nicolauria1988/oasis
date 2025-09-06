@@ -158,7 +158,9 @@ router.put('/location/:id', async (req, res) => {
 
 router.get('/location/:id/availability', requireLogin, async (req, res) => {
   const locationId = req.params.id;
-  const location = await Location.findById(locationId).populate('reservations');
+  const location = await Location.findById(locationId)
+    .populate('reservations')
+    .populate('user');
   res.render('availability', { location, ...res.locals });
 });
 
