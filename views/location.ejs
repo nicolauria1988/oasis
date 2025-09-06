@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <%- include('header.ejs') %>
+    <%- include('header.ejs', { user: user }) %>
     <div class="px-10 py-5">
       <div class="grid gap-4 max-w-3xl mx-auto">
         <div class="flex justify-between items-center mt-5">
