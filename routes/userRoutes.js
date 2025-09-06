@@ -21,7 +21,7 @@ const ensureUploadDir = (dir) => {
 };
 
 router.get('/user/:id/edit', requireLogin, async (req, res) => {
-  res.render('editUser');
+  res.render('editUser', { ...res.locals });
 });
 
 router.put('/user/:id', requireLogin, async (req, res) => {

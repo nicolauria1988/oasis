@@ -21,13 +21,13 @@ const ensureUploadDir = (dir) => {
 };
 
 router.get('/location/new', requireLogin, async (req, res) => {
-  res.render('addLocation');
+  res.render('addLocation', { ...res.locals });
 });
 
 router.get('/location/:id', async (req, res) => {
   const locationId = req.params.id;
   const location = await Location.findById(locationId).populate('reservations');
-  res.render('location', { location });
+  res.render('location', { location, ...res.locals });
 });
 
 router.post('/location', requireLogin, async (req, res) => {
@@ -84,7 +84,7 @@ router.post('/location', requireLogin, async (req, res) => {
 router.get('/location/:id/edit', async (req, res) => {
   const locationId = req.params.id;
   const location = await Location.findById(locationId);
-  res.render('editLocation', { location });
+  res.render('editLocation', { location, ...res.locals });
 });
 
 router.put('/location/:id', async (req, res) => {
@@ -159,7 +159,7 @@ router.put('/location/:id', async (req, res) => {
 router.get('/location/:id/availability', requireLogin, async (req, res) => {
   const locationId = req.params.id;
   const location = await Location.findById(locationId).populate('reservations');
-  res.render('availability', { location });
+  res.render('availability', { location, ...res.locals });
 });
 
 export default router;
