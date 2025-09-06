@@ -14,8 +14,8 @@
       class="grid grid-cols-2 gap-x-4 gap-y-4 sm:gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8 mb-5 px-10 py-5"
     >
       <% locations.forEach(location => { %>
-      <a href="/location/<%= location.id %>">
-        <li class="relative">
+      <li class="relative">
+        <a href="/location/<%= location._id %>">
           <div
             class="group overflow-hidden rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 focus-within:ring-offset-gray-100"
           >
@@ -30,8 +30,8 @@
           <p class="block text-sm font-medium text-gray-500">
             $<%= location.price %>
           </p>
-        </li>
-      </a>
+        </a>
+      </li>
       <% }) %>
     </ul>
     <script src="/js/header.js"></script>
