@@ -100,8 +100,8 @@ app.use(csrfProtection);
 // Middleware for user and csrfToken
 app.use(async (req, res, next) => {
   if (req.session.user && req.session.user._id) {
-    const fullUser = await User.findById(req.session.user._id).lean();
-    res.locals.user = fullUser || null;
+    const fullUser = await User.findById(req.session.user._id);
+    res.locals.user = fullUser;
   } else {
     res.locals.user = null;
   }
